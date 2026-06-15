@@ -1,0 +1,183 @@
+\begin{table}[!h]
+\centering
+\caption{Largest absolute dyad-level LOO deltas. Positive deltas favor the first model in the comparison.}
+\centering
+\begin{tabular}[t]{lrllllll}
+\toprule
+Gen & Rep & Comparison & Dyad & Blocks & Aij/Aji/N & Favours & Delta ELPD\\
+\midrule
+SST & 1 & SST_minus_DC & 11-41 & 2-3 & 10/0/10 & DC & -0.36\\
+SST & 1 & SST_minus_DC & 24-33 & 2-3 & 5/4/9 & SST & 0.34\\
+SST & 1 & SST_minus_DC & 25-44 & 3-4 & 6/0/6 & SST & 0.28\\
+SST & 1 & SST_minus_DC & 12-18 & 2-3 & 6/7/13 & SST & 0.26\\
+SST & 1 & SST_minus_DC & 7-22 & 3-4 & 0/5/5 & SST & 0.26\\
+\addlinespace
+SST & 1 & SST_minus_DC & 6-13 & 2-3 & 0/8/8 & DC & -0.25\\
+SST & 1 & SST_minus_DC & 19-43 & 3-4 & 4/3/7 & DC & -0.25\\
+SST & 1 & SST_minus_DC & 39-44 & 4-4 & 6/2/8 & DC & -0.24\\
+SST & 1 & WST_minus_DC & 1-44 & 1-4 & 2/2/4 & WST & 0.45\\
+SST & 1 & WST_minus_DC & 20-39 & 1-4 & 3/2/5 & WST & 0.42\\
+\addlinespace
+SST & 1 & WST_minus_DC & 13-44 & 2-4 & 3/2/5 & WST & 0.37\\
+SST & 1 & WST_minus_DC & 19-48 & 1-4 & 2/4/6 & WST & 0.37\\
+SST & 1 & WST_minus_DC & 39-48 & 1-4 & 2/4/6 & WST & 0.37\\
+SST & 1 & WST_minus_DC & 39-40 & 2-4 & 0/7/7 & DC & -0.34\\
+SST & 1 & WST_minus_DC & 19-32 & 1-4 & 0/10/10 & DC & -0.32\\
+\addlinespace
+SST & 1 & WST_minus_DC & 36-39 & 1-4 & 9/0/9 & DC & -0.29\\
+SST & 1 & WST_minus_SST & 25-44 & 3-4 & 6/0/6 & SST & -0.39\\
+SST & 1 & WST_minus_SST & 12-18 & 2-3 & 6/7/13 & SST & -0.37\\
+SST & 1 & WST_minus_SST & 7-22 & 3-4 & 0/5/5 & SST & -0.33\\
+SST & 1 & WST_minus_SST & 1-44 & 1-4 & 2/2/4 & WST & 0.32\\
+\addlinespace
+SST & 1 & WST_minus_SST & 24-33 & 2-3 & 5/4/9 & SST & -0.31\\
+SST & 1 & WST_minus_SST & 20-39 & 1-4 & 3/2/5 & WST & 0.29\\
+SST & 1 & WST_minus_SST & 19-43 & 3-4 & 4/3/7 & WST & 0.28\\
+SST & 1 & WST_minus_SST & 39-48 & 1-4 & 2/4/6 & WST & 0.26\\
+WST & 1 & SST_minus_DC & 3-8 & 1-2 & 0/4/4 & DC & -6.56\\
+\addlinespace
+WST & 1 & SST_minus_DC & 3-18 & 1-2 & 0/4/4 & DC & -6.55\\
+WST & 1 & SST_minus_DC & 21-36 & 1-4 & 6/5/11 & DC & -4.99\\
+WST & 1 & SST_minus_DC & 32-42 & 1-4 & 5/6/11 & DC & -4.95\\
+WST & 1 & SST_minus_DC & 7-46 & 1-2 & 0/3/3 & DC & -4.87\\
+WST & 1 & SST_minus_DC & 17-28 & 1-2 & 0/3/3 & DC & -4.87\\
+\addlinespace
+WST & 1 & SST_minus_DC & 17-21 & 1-2 & 0/3/3 & DC & -4.87\\
+WST & 1 & SST_minus_DC & 3-28 & 1-2 & 0/3/3 & DC & -4.85\\
+WST & 1 & WST_minus_DC & 13-20 & 2-4 & 2/1/3 & WST & 0.94\\
+WST & 1 & WST_minus_DC & 7-20 & 2-4 & 2/1/3 & WST & 0.93\\
+WST & 1 & WST_minus_DC & 5-33 & 2-4 & 1/3/4 & WST & 0.92\\
+\addlinespace
+WST & 1 & WST_minus_DC & 9-26 & 2-4 & 3/1/4 & WST & 0.90\\
+WST & 1 & WST_minus_DC & 7-32 & 2-4 & 3/1/4 & WST & 0.89\\
+WST & 1 & WST_minus_DC & 4-13 & 2-4 & 1/6/7 & WST & 0.79\\
+WST & 1 & WST_minus_DC & 20-39 & 3-4 & 2/6/8 & WST & 0.42\\
+WST & 1 & WST_minus_DC & 8-23 & 1-3 & 13/3/16 & WST & 0.42\\
+\addlinespace
+WST & 1 & WST_minus_SST & 3-8 & 1-2 & 0/4/4 & WST & 6.53\\
+WST & 1 & WST_minus_SST & 3-18 & 1-2 & 0/4/4 & WST & 6.53\\
+WST & 1 & WST_minus_SST & 21-36 & 1-4 & 6/5/11 & WST & 5.06\\
+WST & 1 & WST_minus_SST & 32-42 & 1-4 & 5/6/11 & WST & 5.01\\
+WST & 1 & WST_minus_SST & 17-21 & 1-2 & 0/3/3 & WST & 4.84\\
+\addlinespace
+WST & 1 & WST_minus_SST & 3-28 & 1-2 & 0/3/3 & WST & 4.83\\
+WST & 1 & WST_minus_SST & 7-46 & 1-2 & 0/3/3 & WST & 4.82\\
+WST & 1 & WST_minus_SST & 33-48 & 1-2 & 0/3/3 & WST & 4.82\\
+SST & 2 & SST_minus_DC & 40-42 & 1-2 & 4/0/4 & DC & -0.46\\
+SST & 2 & SST_minus_DC & 16-20 & 1-2 & 1/4/5 & DC & -0.44\\
+\addlinespace
+SST & 2 & SST_minus_DC & 13-20 & 1-2 & 1/4/5 & DC & -0.43\\
+SST & 2 & SST_minus_DC & 1-36 & 1-2 & 2/4/6 & DC & -0.35\\
+SST & 2 & SST_minus_DC & 2-39 & 3-4 & 5/4/9 & SST & 0.29\\
+SST & 2 & SST_minus_DC & 5-8 & 1-4 & 1/2/3 & SST & 0.27\\
+SST & 2 & SST_minus_DC & 13-14 & 1-2 & 5/0/5 & SST & 0.27\\
+\addlinespace
+SST & 2 & SST_minus_DC & 19-31 & 1-2 & 5/0/5 & SST & 0.26\\
+SST & 2 & WST_minus_DC & 5-8 & 1-4 & 1/2/3 & WST & 0.56\\
+SST & 2 & WST_minus_DC & 27-44 & 1-4 & 2/2/4 & WST & 0.52\\
+SST & 2 & WST_minus_DC & 31-45 & 2-4 & 1/2/3 & WST & 0.51\\
+SST & 2 & WST_minus_DC & 10-38 & 1-4 & 3/2/5 & WST & 0.51\\
+\addlinespace
+SST & 2 & WST_minus_DC & 8-19 & 1-4 & 2/4/6 & WST & 0.48\\
+SST & 2 & WST_minus_DC & 24-45 & 2-4 & 6/0/6 & DC & -0.34\\
+SST & 2 & WST_minus_DC & 12-36 & 2-4 & 1/0/1 & WST & 0.29\\
+SST & 2 & WST_minus_DC & 2-36 & 2-4 & 1/0/1 & WST & 0.28\\
+SST & 2 & WST_minus_SST & 31-45 & 2-4 & 1/2/3 & WST & 0.66\\
+\addlinespace
+SST & 2 & WST_minus_SST & 40-42 & 1-2 & 4/0/4 & WST & 0.53\\
+SST & 2 & WST_minus_SST & 16-20 & 1-2 & 1/4/5 & WST & 0.52\\
+SST & 2 & WST_minus_SST & 13-20 & 1-2 & 1/4/5 & WST & 0.48\\
+SST & 2 & WST_minus_SST & 24-45 & 2-4 & 6/0/6 & SST & -0.45\\
+SST & 2 & WST_minus_SST & 1-36 & 1-2 & 2/4/6 & WST & 0.40\\
+\addlinespace
+SST & 2 & WST_minus_SST & 12-36 & 2-4 & 1/0/1 & WST & 0.37\\
+SST & 2 & WST_minus_SST & 2-36 & 2-4 & 1/0/1 & WST & 0.36\\
+WST & 2 & SST_minus_DC & 14-30 & 2-4 & 6/3/9 & DC & -2.97\\
+WST & 2 & SST_minus_DC & 7-41 & 2-4 & 5/6/11 & DC & -2.61\\
+WST & 2 & SST_minus_DC & 13-22 & 2-4 & 1/4/5 & DC & -2.16\\
+\addlinespace
+WST & 2 & SST_minus_DC & 17-20 & 2-3 & 2/0/2 & SST & 1.92\\
+WST & 2 & SST_minus_DC & 19-43 & 3-4 & 2/3/5 & SST & 1.83\\
+WST & 2 & SST_minus_DC & 8-29 & 3-4 & 2/3/5 & SST & 1.82\\
+WST & 2 & SST_minus_DC & 30-33 & 2-4 & 0/3/3 & DC & -1.77\\
+WST & 2 & SST_minus_DC & 7-38 & 2-4 & 3/4/7 & DC & -1.77\\
+\addlinespace
+WST & 2 & WST_minus_DC & 17-20 & 2-3 & 2/0/2 & WST & 1.41\\
+WST & 2 & WST_minus_DC & 44-45 & 1-2 & 3/1/4 & WST & 0.78\\
+WST & 2 & WST_minus_DC & 27-44 & 1-2 & 1/3/4 & WST & 0.78\\
+WST & 2 & WST_minus_DC & 1-7 & 1-2 & 3/1/4 & WST & 0.78\\
+WST & 2 & WST_minus_DC & 21-24 & 1-2 & 3/1/4 & WST & 0.76\\
+\addlinespace
+WST & 2 & WST_minus_DC & 15-24 & 2-3 & 1/0/1 & WST & 0.66\\
+WST & 2 & WST_minus_DC & 2-25 & 2-3 & 1/1/2 & WST & 0.56\\
+WST & 2 & WST_minus_DC & 15-30 & 2-3 & 1/1/2 & WST & 0.55\\
+WST & 2 & WST_minus_SST & 14-30 & 2-4 & 6/3/9 & WST & 3.06\\
+WST & 2 & WST_minus_SST & 7-41 & 2-4 & 5/6/11 & WST & 2.50\\
+\addlinespace
+WST & 2 & WST_minus_SST & 13-22 & 2-4 & 1/4/5 & WST & 2.18\\
+WST & 2 & WST_minus_SST & 7-38 & 2-4 & 3/4/7 & WST & 1.81\\
+WST & 2 & WST_minus_SST & 30-33 & 2-4 & 0/3/3 & WST & 1.77\\
+WST & 2 & WST_minus_SST & 6-24 & 2-4 & 4/3/7 & WST & 1.76\\
+WST & 2 & WST_minus_SST & 13-47 & 2-4 & 3/4/7 & WST & 1.68\\
+\addlinespace
+WST & 2 & WST_minus_SST & 19-43 & 3-4 & 2/3/5 & SST & -1.62\\
+SST & 3 & SST_minus_DC & 6-33 & 1-3 & 0/1/1 & DC & -0.24\\
+SST & 3 & SST_minus_DC & 33-40 & 1-3 & 1/1/2 & DC & -0.24\\
+SST & 3 & SST_minus_DC & 9-34 & 1-3 & 0/1/1 & DC & -0.24\\
+SST & 3 & SST_minus_DC & 27-36 & 1-3 & 1/0/1 & DC & -0.24\\
+\addlinespace
+SST & 3 & SST_minus_DC & 29-36 & 1-3 & 1/0/1 & DC & -0.23\\
+SST & 3 & SST_minus_DC & 9-29 & 1-3 & 0/1/1 & DC & -0.23\\
+SST & 3 & SST_minus_DC & 15-30 & 1-3 & 0/1/1 & DC & -0.23\\
+SST & 3 & SST_minus_DC & 29-40 & 1-3 & 1/1/2 & DC & -0.22\\
+SST & 3 & WST_minus_DC & 13-17 & 1-4 & 2/1/3 & WST & 0.43\\
+\addlinespace
+SST & 3 & WST_minus_DC & 5-42 & 2-4 & 1/2/3 & WST & 0.40\\
+SST & 3 & WST_minus_DC & 13-48 & 1-4 & 2/5/7 & WST & 0.37\\
+SST & 3 & WST_minus_DC & 24-26 & 1-4 & 2/6/8 & WST & 0.37\\
+SST & 3 & WST_minus_DC & 19-36 & 1-4 & 2/7/9 & WST & 0.36\\
+SST & 3 & WST_minus_DC & 28-42 & 2-4 & 3/2/5 & WST & 0.34\\
+\addlinespace
+SST & 3 & WST_minus_DC & 21-23 & 2-4 & 2/3/5 & WST & 0.32\\
+SST & 3 & WST_minus_DC & 32-40 & 1-4 & 2/6/8 & WST & 0.31\\
+SST & 3 & WST_minus_SST & 27-36 & 1-3 & 1/0/1 & WST & 0.54\\
+SST & 3 & WST_minus_SST & 29-36 & 1-3 & 1/0/1 & WST & 0.54\\
+SST & 3 & WST_minus_SST & 9-34 & 1-3 & 0/1/1 & WST & 0.54\\
+\addlinespace
+SST & 3 & WST_minus_SST & 9-29 & 1-3 & 0/1/1 & WST & 0.54\\
+SST & 3 & WST_minus_SST & 6-33 & 1-3 & 0/1/1 & WST & 0.54\\
+SST & 3 & WST_minus_SST & 15-30 & 1-3 & 0/1/1 & WST & 0.53\\
+SST & 3 & WST_minus_SST & 29-45 & 1-3 & 1/1/2 & WST & 0.46\\
+SST & 3 & WST_minus_SST & 4-33 & 1-3 & 1/1/2 & WST & 0.46\\
+\addlinespace
+WST & 3 & SST_minus_DC & 12-15 & 3-4 & 1/2/3 & SST & 3.03\\
+WST & 3 & SST_minus_DC & 4-46 & 1-2 & 3/2/5 & SST & 2.99\\
+WST & 3 & SST_minus_DC & 6-24 & 2-4 & 4/0/4 & DC & -1.74\\
+WST & 3 & SST_minus_DC & 13-14 & 3-4 & 0/1/1 & SST & 1.57\\
+WST & 3 & SST_minus_DC & 35-40 & 3-4 & 1/0/1 & SST & 1.56\\
+\addlinespace
+WST & 3 & SST_minus_DC & 11-37 & 3-4 & 0/1/1 & SST & 1.55\\
+WST & 3 & SST_minus_DC & 13-37 & 3-4 & 1/1/2 & SST & 1.38\\
+WST & 3 & SST_minus_DC & 8-43 & 3-4 & 1/1/2 & SST & 1.38\\
+WST & 3 & WST_minus_DC & 4-46 & 1-2 & 3/2/5 & WST & 1.57\\
+WST & 3 & WST_minus_DC & 12-15 & 3-4 & 1/2/3 & WST & 0.99\\
+\addlinespace
+WST & 3 & WST_minus_DC & 26-29 & 1-2 & 2/1/3 & WST & 0.71\\
+WST & 3 & WST_minus_DC & 29-36 & 1-2 & 1/2/3 & WST & 0.71\\
+WST & 3 & WST_minus_DC & 36-47 & 1-2 & 2/1/3 & WST & 0.71\\
+WST & 3 & WST_minus_DC & 2-47 & 1-2 & 2/1/3 & WST & 0.71\\
+WST & 3 & WST_minus_DC & 13-14 & 3-4 & 0/1/1 & WST & 0.52\\
+\addlinespace
+WST & 3 & WST_minus_DC & 35-40 & 3-4 & 1/0/1 & WST & 0.52\\
+WST & 3 & WST_minus_SST & 12-15 & 3-4 & 1/2/3 & SST & -2.03\\
+WST & 3 & WST_minus_SST & 6-24 & 2-4 & 4/0/4 & WST & 1.85\\
+WST & 3 & WST_minus_SST & 17-46 & 2-4 & 4/3/7 & WST & 1.45\\
+WST & 3 & WST_minus_SST & 4-46 & 1-2 & 3/2/5 & SST & -1.42\\
+\addlinespace
+WST & 3 & WST_minus_SST & 22-46 & 2-3 & 4/1/5 & WST & 1.34\\
+WST & 3 & WST_minus_SST & 6-7 & 2-4 & 4/4/8 & WST & 1.33\\
+WST & 3 & WST_minus_SST & 7-14 & 2-4 & 8/0/8 & SST & -1.18\\
+WST & 3 & WST_minus_SST & 19-46 & 2-4 & 4/5/9 & WST & 1.13\\
+\bottomrule
+\end{tabular}
+\end{table}

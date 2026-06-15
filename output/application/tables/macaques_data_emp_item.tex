@@ -1,0 +1,22 @@
+\begin{table}
+\centering
+\caption{\label{tab:tab:macaques-data-empirical-emp-item}Macaques Data — Empirical: Empirical order at item level. Entries show posterior mean with 95\% CI; $\dagger$ flags small ESS ($<200$) or large MCSE ($>25\%$ of CI width). “(all)” uses the unconditional success set (no premise); “Prem.” is the average number of premise-satisfying triples and “Cov.” the average premise coverage.}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{llrrrrrrr}
+\toprule
+\multicolumn{2}{c}{ } & \multicolumn{2}{c}{Empirical (premise)} & \multicolumn{2}{c}{Empirical (all)} & \multicolumn{2}{c}{Sets} \\
+\cmidrule(l{3pt}r{3pt}){3-4} \cmidrule(l{3pt}r{3pt}){5-6} \cmidrule(l{3pt}r{3pt}){7-8}
+fit_model & K & fit model & $\zeta_{\mathrm{W}}$ (item) & $\zeta_{\mathrm{S}}$ (item) & $\zeta_{\mathrm{W}}$ (item, all) & $\zeta_{\mathrm{S}}$ (item, all) & Prem. (avg) & Cov. (avg)\\
+\midrule
+SST & 10 & SST & 1.000 [1.000--1.000] & 0.354 [0.331--0.449] & 0.982 [0.958--0.992] & 0.348 [0.325--0.442] & 117.9 & 0.982\\
+WST & 10 & WST & 1.000 [1.000--1.000] & 0.349 [0.312--0.412] & 0.941 [0.893--0.952] & 0.329 [0.286--0.393] & 79.2 & 0.941\\
+DC-SBM & 9 & DC-SBM & 1.000 [1.000--1.000] & 0.385 [0.244--0.458]\textsuperscript{$\dagger$} & 0.984 [0.964--1.000] & 0.379 [0.238--0.452]\textsuperscript{$\dagger$} & 82.7 & 0.984\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item Entries show posterior mean with 95% CI; dagger flags small ESS (<200) or large MCSE (>25% of CI width). “(all)” ignores the premise and scores unconditional success; “Prem.” is the average number of triples satisfying the premise; “Cov.” is the average premise coverage.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

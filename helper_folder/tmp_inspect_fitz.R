@@ -1,0 +1,6 @@
+sst <- readRDS('posterior_predictive_checks/high_school/SST/high_school_SST_fit.rds')
+wst <- readRDS('posterior_predictive_checks/high_school/WST/high_school_WST_fit.rds')
+cat('SST class z:', class(sst$z), '\n')
+str(sst$z, max.level = 1)
+cat('WST class z:', class(wst$z), '\n')
+str(wst$z, max.level = 1)

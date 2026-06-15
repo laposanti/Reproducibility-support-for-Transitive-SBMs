@@ -1,0 +1,38 @@
+run_id: DemoOCRPvar_run_20260604_211823
+script: DemoOCRPvar.R
+dgp_partition: balanced block sizes
+run_dir: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260604_211823
+git_commit_short: ede45cc
+start_time: 2026-06-04 21:18:23 IST
+end_time: 2026-06-04 21:27:22 IST
+elapsed_seconds: 539.326
+smoke_mode: false
+gen_models: SST,WST
+K_grid: 4
+kappa_mean_grid: 5
+density_levels: kappa_5
+hierarchy_levels: verystrong
+n_rep: 2
+n_items: 40
+eta_mode: CONSTANT
+n_iter: 1200
+burn: 300
+thin: 2
+K_init_ordered_models: n_items
+K_init_dcsbm: n_items
+K_expected_policy: K_true per replicate
+tau0_floor: 0.2
+b_kappa_ordered: 1
+b_eta_ordered: 1
+ordering_prior_mode: equivalence_class
+osbm_partition_prior: OCRP
+theta_ocrp_policy: fixed_env_override
+theta_ocrp_by_K: K4=1.000000
+alpha_crp_policy: fixed=1
+cores: 4
+save_loo_pointwise: TRUE
+first_rep_snapshot_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260604_211823/snapshot_after_rep1_DemoOCRPvar_run_20260604_211823.csv
+timing_estimate_file: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260604_211823/timing_estimate_after_rep1.txt
+progress_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260604_211823/full_simulation_crossfit_progress_DemoOCRPvar_run_20260604_211823.csv
+final_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260604_211823/full_simulation_crossfit_final_DemoOCRPvar_run_20260604_211823.csv
+n_rows_final: 12

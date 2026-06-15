@@ -1,0 +1,13 @@
+=== Extended simulation study v2 started: 2026-03-26 10:39:30.689246 ===
+SMOKE=TRUE  N_REP=1  N_ITER=600  BURN=200  THIN=1  N_SIM=60  SEED=2026
+
+ ====================================================================== 
+PART 1: SIMULATED DATA
+====================================================================== 
+Simulation grid: 8 scenarios × 1 reps = 8 datasets
+Methods per dataset: 12 OSBM variants + 1 DCSBM = 13 fits
+
+--- [1/8] gen=WST K=3 signal=strong rep=1 seed=822905 ---
+  sum(A)=2270  density=0.363
+  default / fit=WST  b_kappa=1.0 gamma=0.953 moves=TRUE hier=FALSE ... 
+Execution halted

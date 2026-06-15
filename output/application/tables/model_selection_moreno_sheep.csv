@@ -1,0 +1,4 @@
+dataset,fit_model,n,K_hat,K_trace_mean,K_trace_sd,elpd,Delta_ELPD,psis_tail_share,time
+moreno_sheep,SST,28,6,6,NA,-884.9,0,0.053,219
+moreno_sheep,WST,28,6,6,NA,-913.1,-28.200000000000045,0.087,229.7
+moreno_sheep,DCSBM,28,6,6,NA,-927.9,-43,0.262,124.4

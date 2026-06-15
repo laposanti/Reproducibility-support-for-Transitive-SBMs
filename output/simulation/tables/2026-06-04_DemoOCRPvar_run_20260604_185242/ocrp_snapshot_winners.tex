@@ -1,0 +1,27 @@
+\begin{table}[!h]
+\centering
+\caption{OCRP snapshot: scenario-level winners for predictive performance, VI, ARI, and exact $K$ recovery.\\label{tab:ocrp-snapshot-winners}}
+\centering
+\begin{tabular}[t]{llllllllll}
+\toprule
+Gen & $K^\star$ & Density & Hierarchy & ELPD winner & VI winner & ARI winner & Exact K models & Block sizes & $\vartheta$\\
+\midrule
+SST & 4 & dense & strong & SST & WST/SST/DC-SBM & WST/SST/DC-SBM & WST/SST/DC-SBM & 7;12;4;37 & 1.00\\
+SST & 4 & dense & weak & WST & SST & DC-SBM & -- & 6;31;2;21 & 1.00\\
+SST & 4 & sparse & strong & WST & SST & SST & -- & 6;31;2;21 & 1.00\\
+SST & 4 & sparse & weak & DC-SBM & WST/SST/DC-SBM & WST/SST/DC-SBM & -- & 6;31;2;21 & 1.00\\
+SST & 8 & dense & strong & DC-SBM & WST & SST/DC-SBM & -- & 2;1;1;1;7;3;20;25 & 1.00\\
+SST & 8 & dense & weak & WST & SST & DC-SBM & -- & 2;1;1;1;7;3;20;25 & 1.00\\
+SST & 8 & sparse & strong & DC-SBM & WST & WST & -- & 1;2;8;1;9;2;1;36 & 1.00\\
+SST & 8 & sparse & weak & DC-SBM & WST/SST & WST/SST & -- & 1;2;8;1;9;2;1;36 & 1.00\\
+WST & 4 & dense & strong & WST & WST/SST & WST/SST & WST/SST & 1;7;5;47 & 1.00\\
+WST & 4 & dense & weak & WST & SST & WST/SST/DC-SBM & SST & 1;7;5;47 & 1.00\\
+WST & 4 & sparse & strong & DC-SBM & WST/SST & DC-SBM & WST/SST & 1;7;5;47 & 1.00\\
+WST & 4 & sparse & weak & SST & SST & SST & SST & 1;7;5;47 & 1.00\\
+WST & 8 & dense & strong & WST & WST & WST & -- & 2;1;1;1;7;3;20;25 & 1.00\\
+WST & 8 & dense & weak & WST & SST & WST & -- & 2;1;1;1;7;3;20;25 & 1.00\\
+WST & 8 & sparse & strong & DC-SBM & SST & WST/SST/DC-SBM & -- & 2;1;1;1;7;3;20;25 & 1.00\\
+WST & 8 & sparse & weak & DC-SBM & WST/SST/DC-SBM & WST/SST/DC-SBM & -- & 2;1;1;1;7;3;20;25 & 1.00\\
+\bottomrule
+\end{tabular}
+\end{table}

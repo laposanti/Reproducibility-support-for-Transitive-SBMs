@@ -1,0 +1,4 @@
+dataset,fit_model,n,K_hat,K_trace_mean,K_trace_sd,elpd,Delta_ELPD,psis_tail_share,time
+citations_data,DCSBM,47,11,11,NA,-6092.1,0,0.041,321.6
+citations_data,WST,47,14,14,NA,-6248.2,-156.09999999999945,0.062,1152
+citations_data,SST,47,5,5,NA,-8730.3,-2638.199999999999,0.081,501.4

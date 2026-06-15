@@ -1,0 +1,7 @@
+"dataset","best_model","second_model","delta_elpd","se_delta_elpd","delta_looic","se_delta_looic","z_ratio","delta_elpd_per_obs","n_obs","verdict","third_model","delta_elpd_3rd","se_delta_3rd"
+"moreno_sheep","SST","WST",-28.34,14.74,56.68,29.47,1.92,-0.0375,756,"indistinguishable","DCSBM",-43.15,17.87
+"strauss_2019b","WST","SST",-228.85,82.72,457.71,165.44,2.77,-0.1923,1190,"weak edge","DCSBM",-397.77,84.88
+"mountain_goats","SST","DCSBM",-41.82,8.56,83.64,17.12,4.89,-0.0211,1980,"clear winner","WST",-95.94,11.45
+"citations_data","DCSBM","WST",-156.06,106.24,312.13,212.49,1.47,-0.0722,2162,"indistinguishable","SST",-2584.84,305.15
+"macaques_data","DCSBM","SST",-34.37,28.66,68.73,57.33,1.2,-0.0091,3782,"indistinguishable","WST",-242.7,17.2
+"high_school","SST","WST",-60.67,8.76,121.33,17.52,6.93,-0.0126,4830,"clear winner","DCSBM",-202.58,27.95

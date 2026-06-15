@@ -1,0 +1,6 @@
+"fit_model","method","K_true","n_rep","K_hat_mean","ari_mean","vi_mean","elpd_mean","looic_mean","viol_rate_mean","bf_wst_mean","bf_sst_mean","thetaW_model_mean","thetaS_model_mean"
+"DCSBM","dcsbm_varK",3,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"SST","calibrate_full",3,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"SST","spectral_ruleA",3,1,2,0.4762,1.8022,-4821.67,9643.33,0.492866525934411,NA,NA,NA,NA
+"WST","calibrate_full",3,1,1,1,1.585,-4819.72,9639.44,0.471212521302652,NA,NA,NA,NA
+"WST","spectral_ruleA",3,1,2,0.4762,1.9261,-4818.66,9637.32,0.455760539180917,NA,NA,NA,NA

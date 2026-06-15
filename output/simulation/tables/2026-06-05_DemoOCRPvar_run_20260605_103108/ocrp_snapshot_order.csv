@@ -1,0 +1,7 @@
+Gen,$K^\star$,Density,Hierarchy,Rep,Model,$\widehat\zeta_W^{blk}$,$\widehat\zeta_S^{blk}$,Block coverage,Violation mean,Violation $\hat z$,$p_{post}(WST)$,$p_{post}(SST)$
+SST,8,kappa_0.25,app_sparse,1,DC-SBM,0.902,0.201,0.830,0.201,0.508,--,--
+SST,8,kappa_0.25,app_sparse,1,SST,0.985,0.448,0.896,0.214,0.575,--,--
+SST,8,kappa_0.25,app_sparse,1,WST,0.965,0.445,0.795,0.240,0.568,--,--
+WST,8,kappa_0.25,app_sparse,1,DC-SBM,1.000,0.218,1.000,0.102,0.271,--,--
+WST,8,kappa_0.25,app_sparse,1,SST,1.000,0.362,1.000,0.107,0.252,--,--
+WST,8,kappa_0.25,app_sparse,1,WST,1.000,0.305,1.000,0.124,0.375,--,--

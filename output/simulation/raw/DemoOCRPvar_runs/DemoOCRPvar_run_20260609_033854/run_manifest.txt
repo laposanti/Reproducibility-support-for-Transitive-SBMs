@@ -1,0 +1,55 @@
+run_id: DemoOCRPvar_run_20260609_033854
+script: DemoOCRPvar.R
+dgp_partition: OCRP direct draw with random K_star
+min_block_size: 1
+run_dir: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260609_033854
+git_commit_short: 0d6cf90
+start_time: 2026-06-09 03:38:54 IST
+end_time: 2026-06-09 04:51:57 IST
+elapsed_seconds: 4382.558
+smoke_mode: false
+gen_models: SST,WST
+scenario_specs: default OCRP main grid
+scenario_count: 4
+K_target_grid: random
+kappa_mean_grid: 0.8,4
+density_levels: sparse,dense
+hierarchy_levels: weak,strong
+n_rep: 5
+n_items: 60
+eta_mode: GAMMA
+n_iter: 3000
+burn: 1000
+thin: 2
+K_init_ordered_models: n_items
+K_init_dcsbm: n_items
+K_expected_policy: realized K_star per replicate
+hyper_mode: fixed
+first_rep_snapshot_enabled: FALSE
+tau0_floor: 0.2
+tau0_override: none
+sigma0_override: none
+dominance_target: 0.75
+N0_psi: 13
+a_kappa_fixed: 1
+b_kappa_fixed: 1
+a_eta_fixed: 1
+b_eta_fixed: 1
+mu0_wst: 0
+sigma0_wst: 1.5
+mu0_sst: 0
+sigma0_sst: 1.5
+tau0_sst: 0.5
+gamma_gn_fixed: 0.8
+ordering_prior_mode: equivalence_class
+osbm_partition_prior: OCRP
+theta_ocrp_policy: fixed
+theta_ocrp: 4
+alpha_crp_policy: match_theta_ocrp
+cores: 20
+save_loo_pointwise: FALSE
+first_rep_snapshot_csv: disabled
+timing_estimate_file: disabled
+progress_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260609_033854/full_simulation_crossfit_progress_DemoOCRPvar_run_20260609_033854.csv
+final_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260609_033854/full_simulation_crossfit_final_DemoOCRPvar_run_20260609_033854.csv
+n_rows_final: 60

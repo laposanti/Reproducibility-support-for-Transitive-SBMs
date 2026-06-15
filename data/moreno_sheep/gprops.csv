@@ -1,0 +1,102 @@
+# prop_name, value
+name,moreno_sheep
+description,"Dominance interactions among a group of female bighorn sheep (Ovis canadensis) from the National Bison Range in western Montana USA, over a 27 month period ending in 1984. Edge weights represent the frequency of interaction. Metadata gives the sheep ages, roughly."
+citation,"['C. C. Hass. \"Social status in female bighorn sheep (Ovis canadensis): Expression, development and reproductive correlates.\" J. of Zoology 225(3), 509-523 (1991), http://onlinelibrary.wiley.com/doi/10.1111/j.1469-7998.1991.tb03832.x/abstract']"
+url,http://konect.cc/networks/moreno_sheep
+tags,"['Social', 'Animal', 'Weighted', 'Metadata']"
+konect_meta,"category: Animal 
+code: Mc
+name: Sheep
+description: Sheep–Sheep dominances
+entity-names: sheep
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#sheep
+long-description: This directed network describes the dominance relationships between 28 female bighorn sheep (<i>Ovis canadensis</i>) observed on the National Bison Range in western Montana (USA) in 1984. A node represents a female bighorn sheep and an edge represents dominance of the left female bighorn sheep over the right female bighorn sheep. The edge weights indicate how often this dominance behavior was observed.  Sheeps that are listed as nine years old may have been older in reality.
+relationship-names: dominance
+cite: konect:hass
+tags:  #skew
+timeiso:  1984
+"
+konect_readme,"Sheep network, part of the Koblenz Network Collection
+===========================================================================
+
+This directory contains the TSV and related files of the moreno_sheep network: This directed network describes the dominance relationships between 28 female bighorn sheep (<i>Ovis canadensis</i>) observed on the National Bison Range in western Montana (USA) in 1984. A node represents a female bighorn sheep and an edge represents dominance of the left female bighorn sheep over the right female bighorn sheep. The edge weights indicate how often this dominance behavior was observed.  Sheeps that are listed as nine years old may have been older in reality.
+
+
+More information about the network is provided here: 
+http://konect.cc/networks/moreno_sheep
+
+Files: 
+    meta.moreno_sheep -- Metadata about the network 
+    out.moreno_sheep -- The adjacency matrix of the network in whitespace-separated values format, with one edge per line
+      The meaning of the columns in out.moreno_sheep are: 
+        First column: ID of from node 
+        Second column: ID of to node
+        Third column (if present): weight or multiplicity of edge
+        Fourth column (if present):  timestamp of edges Unix time
+        Third column: edge weight
+    ent.moreno_sheep.sheep.age -- Contains the attribute `age` of entity `sheep` of the network
+
+
+Use the following References for citation:
+
+@MISC{konect:2017:moreno_sheep,
+    title = {Sheep network dataset -- {KONECT}},
+    month = oct,
+    year = {2017},
+    url = {http://konect.cc/networks/moreno_sheep}
+}
+
+@article{konect:hass,
+	title = {Social Status in Female Bighorn Sheep (\emph{{Ovis}
+                  canadensis}): Expression, Development and Reproductive
+                  Correlates}, 
+	author = {Hass, Christine C.},
+	journal = {J. Zool.},
+	volume = {225},
+	number = {3},
+	pages = {509--523},
+	year = {1991},
+	publisher = {Wiley}, 
+}
+
+@article{konect:hass,
+	title = {Social Status in Female Bighorn Sheep (\emph{{Ovis}
+                  canadensis}): Expression, Development and Reproductive
+                  Correlates}, 
+	author = {Hass, Christine C.},
+	journal = {J. Zool.},
+	volume = {225},
+	number = {3},
+	pages = {509--523},
+	year = {1991},
+	publisher = {Wiley}, 
+}
+
+
+@inproceedings{konect,
+	title = {{KONECT} -- {The} {Koblenz} {Network} {Collection}},
+	author = {Jérôme Kunegis},
+	year = {2013},
+	booktitle = {Proc. Int. Conf. on World Wide Web Companion},
+	pages = {1343--1350},
+	url = {http://dl.acm.org/citation.cfm?id=2488173},
+	url_presentation = {https://www.slideshare.net/kunegis/presentationwow},
+	url_web = {http://konect.cc/},
+	url_citations = {https://scholar.google.com/scholar?cites=7174338004474749050},
+}
+
+@inproceedings{konect,
+	title = {{KONECT} -- {The} {Koblenz} {Network} {Collection}},
+	author = {Jérôme Kunegis},
+	year = {2013},
+	booktitle = {Proc. Int. Conf. on World Wide Web Companion},
+	pages = {1343--1350},
+	url = {http://dl.acm.org/citation.cfm?id=2488173},
+	url_presentation = {https://www.slideshare.net/kunegis/presentationwow},
+	url_web = {http://konect.cc/},
+	url_citations = {https://scholar.google.com/scholar?cites=7174338004474749050},
+}
+
+
+"

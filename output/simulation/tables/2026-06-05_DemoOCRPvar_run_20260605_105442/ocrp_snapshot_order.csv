@@ -1,0 +1,4 @@
+Gen,$K^\star$,Density,Hierarchy,Rep,Model,$\widehat\zeta_W^{blk}$,$\widehat\zeta_S^{blk}$,Block coverage,Violation mean,Violation $\hat z$,$p_{post}(WST)$,$p_{post}(SST)$
+WST,8,kappa_0.6,app_moderate_nonToeplitz,1,DC-SBM,1.000,0.374,1.000,0.108,0.486,--,--
+WST,8,kappa_0.6,app_moderate_nonToeplitz,1,SST,0.999,0.386,0.960,0.102,0.562,--,--
+WST,8,kappa_0.6,app_moderate_nonToeplitz,1,WST,0.997,0.402,0.943,0.106,0.482,--,--

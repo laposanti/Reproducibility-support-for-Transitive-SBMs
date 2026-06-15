@@ -1,0 +1,20 @@
+\begin{table}[!h]
+\centering
+\caption{WST-generated data: Partition and parameter recovery (ARI, MAE, Coverage).\\\label{tab:wst-main-partition-params}}
+\centering
+\begin{tabular}[t]{lrrrrrrrrr}
+\toprule
+K & fit_model & ARI mean (sd) & Pr(ARI ≥ 0.95) & MAE $\eta$ & MAE $\kappa$ & MAE $\psi$ & Cov $\eta$ & Cov $\kappa$ & Cov $\psi$\\
+\midrule
+4 & WST & 0.928 (0.147) & 80.0\% & 0.103 (0.030) & 0.290 (0.081) & 1.141 (0.151) & 0.87 & 0.41 & 0.20\\
+4 & SST & 0.717 (0.115) & 0.0\% & 0.116 (0.027) & 0.193 (0.027) & NaN (NA) & 0.82 & 0.64 & NaN\\
+4 & DC-SBM & 0.995 (0.012) & 100.0\% & NaN (NA) & NaN (NA) & NaN (NA) & NaN & NaN & NaN\\
+5 & WST & 0.990 (0.014) & 100.0\% & 0.079 (0.008) & 0.248 (0.024) & 0.653 (0.082) & 0.94 & 0.47 & 0.26\\
+5 & SST & 0.736 (0.029) & 0.0\% & 0.097 (0.014) & 0.251 (0.064) & NaN (NA) & 0.89 & 0.60 & NaN\\
+5 & DC-SBM & 0.970 (0.021) & 100.0\% & NaN (NA) & NaN (NA) & NaN (NA) & NaN & NaN & NaN\\
+6 & WST & 0.899 (0.119) & 60.0\% & 0.082 (0.011) & 0.265 (0.132) & 1.170 (0.839) & 0.94 & 0.55 & 0.43\\
+6 & SST & 0.685 (0.087) & 0.0\% & 0.096 (0.023) & 0.227 (0.108) & NaN (NA) & 0.88 & 0.75 & NaN\\
+6 & DC-SBM & 0.852 (0.141) & 40.0\% & NaN (NA) & NaN (NA) & NaN (NA) & NaN & NaN & NaN\\
+\bottomrule
+\end{tabular}
+\end{table}

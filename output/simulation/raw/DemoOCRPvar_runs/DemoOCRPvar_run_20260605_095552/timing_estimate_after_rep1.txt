@@ -1,0 +1,12 @@
+run_id: DemoOCRPvar_run_20260605_095552
+first_rep_tasks: 2
+cores: 4
+first_rep_parallel_waves: 1
+remaining_parallel_waves: 1
+seconds_per_wave_estimate: 433.852
+first_rep_elapsed_seconds: 433.852
+estimated_total_seconds: 867.704
+estimated_remaining_seconds_after_rep1: 433.852
+estimated_total_hours: 0.241
+estimated_remaining_hours_after_rep1: 0.121
+snapshot_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_095552/snapshot_after_rep1_DemoOCRPvar_run_20260605_095552.csv

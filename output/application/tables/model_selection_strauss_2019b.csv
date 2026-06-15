@@ -1,0 +1,4 @@
+dataset,fit_model,n,K_hat,K_trace_mean,K_trace_sd,elpd,Delta_ELPD,psis_tail_share,time
+strauss_2019b,WST,35,14,14,NA,-1942.9,0,0.128,833.2
+strauss_2019b,SST,35,8,8,NA,-2199.9,-257,0.037,371.5
+strauss_2019b,DCSBM,35,6,6,NA,-2340.7,-397.7999999999997,0.16,141.4

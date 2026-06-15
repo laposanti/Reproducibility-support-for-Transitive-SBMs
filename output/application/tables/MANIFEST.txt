@@ -1,0 +1,4 @@
+source_run_id: application_run_20260414_104327
+source_run_dir: /Users/lapo_santi/Desktop/Nial/polya-transitive-sbm/output/application/raw/application_run_20260414_104327
+written_at: 2026-05-10 22:57:41 IST
+written_by: scripts/analysis/app_var_analyze_new.R

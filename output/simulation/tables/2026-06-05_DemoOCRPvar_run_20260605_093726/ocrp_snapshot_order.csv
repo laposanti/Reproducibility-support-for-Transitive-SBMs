@@ -1,0 +1,19 @@
+Gen,$K^\star$,Density,Hierarchy,Rep,Model,$\widehat\zeta_W^{blk}$,$\widehat\zeta_S^{blk}$,Block coverage,Violation mean,Violation $\hat z$,$p_{post}(WST)$,$p_{post}(SST)$
+SST,4,kappa_5,strong,1,DC-SBM,1.000,1.000,1.000,0.218,0.579,--,--
+SST,4,kappa_5,strong,1,SST,1.000,1.000,1.000,0.218,0.579,--,--
+SST,4,kappa_5,strong,1,WST,1.000,1.000,1.000,0.219,0.579,--,--
+SST,4,kappa_5,strong,2,DC-SBM,1.000,1.000,1.000,0.218,0.579,--,--
+SST,4,kappa_5,strong,2,SST,1.000,1.000,1.000,0.218,0.579,--,--
+SST,4,kappa_5,strong,2,WST,1.000,1.000,1.000,0.219,0.579,--,--
+SST,4,kappa_5,strong,3,DC-SBM,1.000,1.000,1.000,0.218,0.579,--,--
+SST,4,kappa_5,strong,3,SST,1.000,1.000,1.000,0.218,0.579,--,--
+SST,4,kappa_5,strong,3,WST,1.000,1.000,1.000,0.219,0.579,--,--
+WST,4,kappa_5,strong,1,DC-SBM,1.000,0.500,1.000,0.265,0.670,--,--
+WST,4,kappa_5,strong,1,SST,1.000,0.500,1.000,0.205,0.670,--,--
+WST,4,kappa_5,strong,1,WST,1.000,0.500,1.000,0.204,0.670,--,--
+WST,4,kappa_5,strong,2,DC-SBM,1.000,0.500,1.000,0.265,0.670,--,--
+WST,4,kappa_5,strong,2,SST,1.000,0.500,1.000,0.205,0.670,--,--
+WST,4,kappa_5,strong,2,WST,1.000,0.500,1.000,0.204,0.670,--,--
+WST,4,kappa_5,strong,3,DC-SBM,1.000,0.500,1.000,0.265,0.670,--,--
+WST,4,kappa_5,strong,3,SST,1.000,0.500,1.000,0.205,0.670,--,--
+WST,4,kappa_5,strong,3,WST,1.000,0.500,1.000,0.204,0.670,--,--

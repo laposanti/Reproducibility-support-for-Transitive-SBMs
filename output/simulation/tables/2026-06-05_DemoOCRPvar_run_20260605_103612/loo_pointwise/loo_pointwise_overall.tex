@@ -1,0 +1,18 @@
+\begin{table}[!h]
+\centering
+\caption{Pointwise LOO decomposition by scenario. Positive deltas favor the first model in the comparison.}
+\centering
+\begin{tabular}[t]{lrlllllll}
+\toprule
+Gen & Rep & Scenario & Comparison & sum Delta ELPD & SE & Sig. & mean Delta & % positive\\
+\midrule
+SST & 1 & SST_appSparse & SST_minus_DC & 43.6 & 9.2 & \checkmark & 0.022 & 58.1\\
+SST & 1 & SST_appSparse & WST_minus_DC & 38.8 & 7.5 & \checkmark & 0.019 & 58.5\\
+SST & 1 & SST_appSparse & WST_minus_SST & -4.7 & 4.1 &  & -0.002 & 45.4\\
+WST & 1 & WST_appSparse & SST_minus_DC & -22.3 & 5.6 & \checkmark & -0.011 & 60.2\\
+WST & 1 & WST_appSparse & WST_minus_DC & -14.8 & 2.9 & \checkmark & -0.007 & 58.5\\
+\addlinespace
+WST & 1 & WST_appSparse & WST_minus_SST & 7.5 & 4.2 &  & 0.004 & 48.7\\
+\bottomrule
+\end{tabular}
+\end{table}

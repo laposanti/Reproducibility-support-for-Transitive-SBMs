@@ -1,0 +1,25 @@
+=== Focused misspecification study: 2026-06-08 20:17:12.864672 ===
+N_ITER=3000  BURN=1000  THIN=2  N_SIM=60  SEED=7777
+K*=3  theta_mean=1.00  theta_sd=0.12  n=60
+sum(A)=1126  density=0.255
+
+--- WST-OSBM ---
+  K=1  ARI=1.000  VI=1.585  LOOIC=5195.05  viol=NaN  (163.1s)
+
+--- SST-OSBM ---
+  SST ERROR: [draw_omega_bar] length(B_d)=2 implies K=3, but length(psi)=0. Labels must be contiguous 1:K.
+  K=NA  ARI=NA  VI=NA  LOOIC=NA  viol=NA  (4.9s)
+
+--- DC-SBM ---
+Warning message:
+Some Pareto k diagnostic values are too high. See help('pareto-k-diagnostic') for details.
+ 
+  K=3  ARI=1.000  VI=0.000  LOOIC=4751.24  viol=0.308  (54.1s)
+
+=== Summary ===
+ fit_model K_hat K_post_mean ari    vi   looic violation_rate time_sec
+       WST     1           1   1 1.585 5195.05            NaN    163.1
+       SST    NA          NA  NA    NA      NA             NA      4.9
+     DCSBM     3           3   1 0.000 4751.24          0.308     54.1
+
+Results saved to output/simulation/raw/misspec_focused_20260608_201712

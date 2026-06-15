@@ -1,0 +1,3 @@
+Gen,$K^\star$,Density,Hierarchy,Rep,ELPD winner,VI winner,ARI winner,Exact K models,Block sizes,$\vartheta$
+WST,4,kappa_5,hetero,1,DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,10;10;10;10,1.00
+WST,4,kappa_5,hetero,2,DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,10;10;10;10,1.00

@@ -1,0 +1,4 @@
+"dataset","fit_model","K_hat","K_mean","K_lo","K_hi","elpd_loo","p_loo","looic","pk_max","pk_bad","b_kappa","time_sec","note"
+"strauss_2019b","WST",14,13.61,13,15,-1942.9,535,3885.9,3.561,0.128,1,1111.4,NA
+"strauss_2019b","SST",7,6.48,6,8,-2171.8,313.8,4343.6,7.064,0.066,5,719.6,NA
+"strauss_2019b","DCSBM",6,6.57,6,8,-2340.7,615.5,4681.4,3.103,0.16,NA,184.3,NA

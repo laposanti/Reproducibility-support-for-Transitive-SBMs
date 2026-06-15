@@ -1,0 +1,14 @@
+\begin{table}[!h]
+\centering
+\caption{macaques_data: For each model, select its best K; among those winners select the best model. ΔELPD is relative to that overall winner; PSIS tail share = fraction with Pareto-\(k>0.7\).\\\label{tab:app-macaques_data-bestK-per-model}}
+\centering
+\begin{tabular}[t]{lrlrrr}
+\toprule
+fit_model & K & Best & ELPD\_LOO & $\Delta$ELPD & % PSIS tail share\\
+\midrule
+SST & 10 & $\bigstar$ & -3583.03 & 0.000 & 1.374934\%\\
+DCSBM & 9 &  & -13069.81 & -9486.784 & 38.762559\%\\
+WST & 9 &  & -11109.32 & -7526.286 & 64.992068\%\\
+\bottomrule
+\end{tabular}
+\end{table}

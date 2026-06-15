@@ -1,0 +1,4 @@
+dataset,fit_model_best,K_best,criterion,elpd_loo_best,looic_best,psis_tail_share_best,thetaW_block_model_mean_best,thetaS_block_model_mean_best,warning_psis,note
+citations_data,WST,9,ELPD_then_PSIS_then_parsimony_then_order,-21856.70670234977,43713.41340469953,0.2627197039777983,0.9998,0.6315,TRUE,NA
+macaques_data,SST,10,ELPD_then_PSIS_then_parsimony_then_order,-3583.0300225942897,7166.060045188579,0.01374933897408778,1,1,FALSE,NA
+mountain_goats,SST,6,ELPD_then_PSIS_then_parsimony_then_order,-1232.459468260046,2464.918936520092,0.02323232323232323,1,1,FALSE,NA

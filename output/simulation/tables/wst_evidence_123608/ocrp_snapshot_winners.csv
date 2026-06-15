@@ -1,0 +1,2 @@
+Gen,$K^\star$,Density,Hierarchy,Rep,ELPD winner,VI winner,ARI winner,Exact K models,Block sizes,$\vartheta$
+WST,10,kappa_0.3,app_sparse_hetero,1,SST,SST,WST,--,7;7;7;7;7;7;7;7;7;7,2.96

@@ -1,0 +1,24 @@
+run_id: DemoKvar_run_20260527_154713
+script: DemoKvar.R
+sim_study_obsolete: true
+run_dir: output/simulation/raw/DemoKvar_runs/DemoKvar_run_20260527_154713
+git_commit_short: 5e2aa94
+start_time: 2026-05-27 15:47:13 IST
+end_time: 2026-05-27 15:47:13 IST
+elapsed_seconds: 0.383
+smoke_mode: 1
+gen_models: WST
+K_grid: 3
+n_rep: 1
+n_items: 10
+n_iter: 30
+burn: 5
+thin: 1
+K_expected: 3
+ordering_prior_mode: equivalence_class
+osbm_partition_prior: OCRP
+theta_ocrp: 0.5
+alpha_crp: 0.5
+progress_csv: output/simulation/raw/DemoKvar_runs/DemoKvar_run_20260527_154713/full_simulation_crossfit_progress_DemoKvar_run_20260527_154713.csv
+final_csv: output/simulation/raw/DemoKvar_runs/DemoKvar_run_20260527_154713/full_simulation_crossfit_final_DemoKvar_run_20260527_154713.csv
+n_rows_final: 0

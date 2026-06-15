@@ -1,0 +1,16 @@
+"dataset","fit_model","metric","new_value","existing_value","diff","matches_existing"
+"moreno_sheep","DCSBM","p_post_wst",0.276366435719784,0.502694380292533,-0.226327944572749,FALSE
+"strauss_2019b","DCSBM","p_post_wst",0.0824143934997097,0.268136970400464,-0.185722576900754,FALSE
+"citations_data","DCSBM","p_post_wst",0,0.000285714285714274,-0.000285714285714274,FALSE
+"macaques_data","DCSBM","p_post_wst",0.561020036429872,0.77959927140255,-0.218579234972678,FALSE
+"moreno_sheep","DCSBM","p_prior_wst",0.05885,0.2235,-0.16465,FALSE
+"strauss_2019b","DCSBM","p_prior_wst",0.009,0.0475,-0.0385,FALSE
+"mountain_goats","DCSBM","p_prior_wst",0.2487,0.541,-0.2923,FALSE
+"moreno_sheep","DCSBM","bf_wst_0",4.6961161549666,2.24919185813214,2.44692429683446,FALSE
+"strauss_2019b","DCSBM","bf_wst_0",9.15715483330108,5.64498885053608,3.512165982765,FALSE
+"mountain_goats","DCSBM","bf_wst_0",4.02090872537193,1.84842883548983,2.1724798898821,FALSE
+"citations_data","DCSBM","bf_wst_0",,Inf,,FALSE
+"moreno_sheep","DCSBM","p_prior_sst",0,0.0025,-0.0025,FALSE
+"mountain_goats","DCSBM","p_prior_sst",0.009,0.089,-0.08,FALSE
+"moreno_sheep","DCSBM","bf_sst_0",,0,,FALSE
+"mountain_goats","DCSBM","bf_sst_0",3.60859348774756,0.364913948199192,3.24367953954837,FALSE

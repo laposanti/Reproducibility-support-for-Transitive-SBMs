@@ -1,0 +1,11 @@
+Gen,$K^\star$,Density,Hierarchy,Rep,ELPD winner,VI winner,ARI winner,Exact K models,Block sizes,$\vartheta$
+WST,10,kappa_0.3,app_sparse_hetero,1,SST,SST,WST,--,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,2,WST,WST,WST,--,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,3,WST,WST,WST,WST/SST,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,4,WST,WST,DC-SBM,--,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,5,WST,DC-SBM,WST,WST,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,6,WST,WST,DC-SBM,--,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,7,SST,WST,WST,--,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,8,WST,WST,WST,SST,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,9,SST,SST,SST,--,7;7;7;7;7;7;7;7;7;7,2.96
+WST,10,kappa_0.3,app_sparse_hetero,10,WST,WST,WST,WST,7;7;7;7;7;7;7;7;7;7,2.96

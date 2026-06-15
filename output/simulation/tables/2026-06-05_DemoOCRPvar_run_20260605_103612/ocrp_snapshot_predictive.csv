@@ -1,0 +1,7 @@
+Gen,$K^\star$,Density,Hierarchy,Rep,Model,ELPD (SE),$\Delta$ELPD (SE),$|\Delta|>2SE$,LOOIC,PSIS $k>0.7$,ELPD winner
+SST,8,kappa_0.25,app_sparse,1,DC-SBM,-1771.7 (51.2),-43.6 (9.2),\checkmark,3543.3,0.05,
+SST,8,kappa_0.25,app_sparse,1,WST,-1732.8 (51.4),-4.7 (4.1),,3465.7,0.01,
+SST,8,kappa_0.25,app_sparse,1,SST,-1728.1 (51.7),0.0 (0.0),,3456.2,0.01,\checkmark
+WST,8,kappa_0.25,app_sparse,1,SST,-1665.3 (49.1),-22.3 (5.6),\checkmark,3330.6,0.02,
+WST,8,kappa_0.25,app_sparse,1,WST,-1657.8 (48.4),-14.8 (2.9),\checkmark,3315.6,0.01,
+WST,8,kappa_0.25,app_sparse,1,DC-SBM,-1643.0 (47.3),0.0 (0.0),,3286.0,0.09,\checkmark

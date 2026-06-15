@@ -1,0 +1,17 @@
+\begin{table}[!h]
+\centering
+\caption{OCRP snapshot: predictive comparison by scenario. $\Delta$ELPD is relative to the best fitted model in each scenario.\\label{tab:ocrp-snapshot-predictive}}
+\centering
+\begin{tabular}[t]{llllllllllll}
+\toprule
+Gen & $K^\star$ & Density & Hierarchy & Rep & Model & ELPD (SE) & $\Delta$ELPD (SE) & $|\Delta|>2SE$ & LOOIC & PSIS $k>0.7$ & ELPD winner\\
+\midrule
+SST & 4 & kappa_2 & strong & 1 & WST & -3866.1 (51.1) & -4.3 (1.5) & \checkmark & 7732.2 & 0.02 & \\
+SST & 4 & kappa_2 & strong & 1 & SST & -3864.2 (51.1) & -2.4 (2.6) &  & 7728.4 & 0.01 & \\
+SST & 4 & kappa_2 & strong & 1 & DC-SBM & -3861.8 (50.9) & 0.0 (0.0) &  & 7723.6 & 0.01 & \checkmark\\
+WST & 4 & kappa_2 & strong & 1 & SST & -4119.2 (54.9) & -2.9 (3.3) &  & 8238.5 & 0.00 & \\
+WST & 4 & kappa_2 & strong & 1 & WST & -4119.1 (54.6) & -2.7 (1.5) &  & 8238.2 & 0.00 & \\
+WST & 4 & kappa_2 & strong & 1 & DC-SBM & -4116.4 (54.8) & 0.0 (0.0) &  & 8232.8 & 0.00 & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{table}

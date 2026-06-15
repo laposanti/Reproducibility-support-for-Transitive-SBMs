@@ -1,0 +1,4 @@
+"dataset","fit_model","K_hat","K_mean","K_lo","K_hi","elpd_loo","p_loo","looic","pk_max","pk_bad","b_kappa","time_sec","note"
+"high_school","WST",9,9.24,7,11,-1228.2,263.7,2456.5,1.38,0.191,1,6859.4,NA
+"high_school","SST",12,10.75,9,13,-1167.6,223.8,2335.1,2.006,0.037,5,8733.6,NA
+"high_school","DCSBM",8,8.44,8,10,-1370.1,374.4,2740.3,4.451,0.235,NA,481.9,NA

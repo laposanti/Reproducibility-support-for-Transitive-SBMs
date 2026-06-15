@@ -1,0 +1,45 @@
+run_id: DemoOCRPvar_run_20260605_123051
+script: DemoOCRPvar.R
+dgp_partition: OCRP conditioned on K_true with min block size 4
+min_block_size: 4
+run_dir: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_123051
+git_commit_short: ede45cc
+start_time: 2026-06-05 12:30:51 IST
+end_time: 2026-06-05 12:31:02 IST
+elapsed_seconds: 11.082
+smoke_mode: false
+gen_models: WST
+scenario_specs: WST_heteroSparse:WST:10:0.30:app_sparse_hetero:3.5:2.0
+scenario_count: 1
+K_grid: 10
+kappa_mean_grid: 0.3
+density_levels: kappa_0.3
+hierarchy_levels: app_sparse_hetero
+n_rep: 1
+n_items: 70
+eta_mode: CONSTANT
+n_iter: 1500
+burn: 300
+thin: 2
+K_init_ordered_models: n_items
+K_init_dcsbm: n_items
+K_expected_policy: K_true per replicate
+tau0_floor: 0.2
+tau0_override: 0.5
+sigma0_override: 2
+dominance_target: 0.75
+N0_psi: 13
+b_kappa_ordered: 1
+b_eta_ordered: 1
+ordering_prior_mode: equivalence_class
+osbm_partition_prior: OCRP
+theta_ocrp_policy: per_K_expected
+theta_ocrp_by_K: K10=2.962919
+alpha_crp_policy: match_theta_ocrp
+cores: 1
+save_loo_pointwise: TRUE
+first_rep_snapshot_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_123051/snapshot_after_rep1_DemoOCRPvar_run_20260605_123051.csv
+timing_estimate_file: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_123051/timing_estimate_after_rep1.txt
+progress_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_123051/full_simulation_crossfit_progress_DemoOCRPvar_run_20260605_123051.csv
+final_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_123051/full_simulation_crossfit_final_DemoOCRPvar_run_20260605_123051.csv
+n_rows_final: 0

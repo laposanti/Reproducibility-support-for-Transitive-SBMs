@@ -1,0 +1,17 @@
+"K","family","volume_fraction","pK","intrinsic_dim"
+3,"WST",1,3,3
+3,"SST",0.3341375,3,3
+3,"Toeplitz_SST",0,3,2
+3,"LST",0,3,2
+4,"WST",1,6,6
+4,"SST",0.0220975,6,6
+4,"Toeplitz_SST",0,6,3
+4,"LST",0,6,3
+5,"WST",1,10,10
+5,"SST",2e-04,10,10
+5,"Toeplitz_SST",0,10,4
+5,"LST",0,10,4
+6,"WST",1,15,15
+6,"SST",0,15,15
+6,"Toeplitz_SST",0,15,5
+6,"LST",0,15,5

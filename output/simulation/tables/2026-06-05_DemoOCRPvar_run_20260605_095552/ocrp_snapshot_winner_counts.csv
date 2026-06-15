@@ -1,0 +1,7 @@
+Gen,Model,ELPD wins,VI wins,ARI wins,Exact K,Scenarios
+SST,DC-SBM,2,3,3,3,3
+SST,SST,1,3,3,3,3
+SST,WST,0,3,3,3,3
+WST,DC-SBM,3,3,3,3,3
+WST,SST,0,3,3,3,3
+WST,WST,0,3,3,3,3

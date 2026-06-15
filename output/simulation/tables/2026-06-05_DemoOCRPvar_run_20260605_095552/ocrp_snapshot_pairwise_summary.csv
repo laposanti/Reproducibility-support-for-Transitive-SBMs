@@ -1,0 +1,3 @@
+Gen,$K^\star$,Density,Hierarchy,Reps,ELPD WST$-$SST mean (SD),Sig. WST/SST,ELPD WST$-$DC mean (SD),Sig. WST/DC,ELPD SST$-$DC mean (SD),Sig. SST/DC,mean VI W/S/DC
+SST,4,kappa_5,strong,3,-3.8 (1.4),0/1,-3.2 (0.2),0/0,0.5 (1.2),0/0,0.000/0.000/0.000
+WST,4,kappa_5,strong,3,168.5 (170.4),3/0,-6.0 (0.4),0/1,-174.4 (170.7),0/3,0.000/0.000/0.000

@@ -1,0 +1,14 @@
+\begin{table}[!h]
+\centering
+\caption{OCRP snapshot: predictive comparison summarized across repetitions. Standard deviations are across repetitions.\\label{tab:ocrp-snapshot-predictive-summary}}
+\centering
+\begin{tabular}[t]{lllllllllllll}
+\toprule
+Gen & $K^\star$ & Density & Hierarchy & Model & Reps & ELPD mean (SD) & $\Delta$ELPD mean (SD) & Sig. loss & ELPD wins & mean VI & mean $\hat K$ & mean PSIS $k>0.7$\\
+\midrule
+WST & 10 & kappa_0.3 & app_sparse_hetero & DC-SBM & 10 & -1922.6 (91.4) & -51.9 (43.5) & 8/10 & 0/10 & 1.806 & 5.40 & 0.093\\
+WST & 10 & kappa_0.3 & app_sparse_hetero & SST & 10 & -1891.8 (113.9) & -21.0 (27.1) & 4/10 & 3/10 & 1.500 & 7.60 & 0.016\\
+WST & 10 & kappa_0.3 & app_sparse_hetero & WST & 10 & -1874.9 (102.1) & -4.1 (7.2) & 2/10 & 7/10 & 1.276 & 7.80 & 0.014\\
+\bottomrule
+\end{tabular}
+\end{table}

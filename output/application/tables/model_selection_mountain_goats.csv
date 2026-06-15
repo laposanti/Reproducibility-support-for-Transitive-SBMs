@@ -1,0 +1,4 @@
+dataset,fit_model,n,K_hat,K_trace_mean,K_trace_sd,elpd,Delta_ELPD,psis_tail_share,time
+mountain_goats,SST,45,8,8,NA,-1257.6,0,0.046,325.1
+mountain_goats,DCSBM,45,4,4,NA,-1295.4,-37.80000000000018,0.134,135.5
+mountain_goats,WST,45,4,4,NA,-1349.5,-91.90000000000009,0.025,259.4

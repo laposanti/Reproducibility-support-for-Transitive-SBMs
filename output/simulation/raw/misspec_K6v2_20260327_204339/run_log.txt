@@ -1,0 +1,26 @@
+=== Misspecification K=6 v2 study: 2026-03-27 20:43:39.76607 ===
+N_ITER=3000  BURN=1000  THIN=2  N_SIM=60  SEED=42
+K*=6  kappa_bar=6  psi=0  n=60
+sum(A)=10582  density=0.934
+
+Using gamma=0.50  b_kappa=50 for OSBM, gamma=0.50 for DC-SBM
+
+--- WST-OSBM ---
+  Hypers: b_kappa=50.0  gamma=0.500
+  => K=2  ARI=0.562  VI=3.179  LOOIC=13940.37  viol=0.496  (434.7s)
+
+--- SST-OSBM ---
+  Hypers: b_kappa=50.0  gamma=0.500
+  => K=2  ARI=0.580  VI=3.107  LOOIC=13930.98  viol=0.479  (226.4s)
+
+--- DC-SBM ---
+  Hypers: gamma=0.500
+  => K=1  ARI=1.000  VI=2.585  LOOIC=13931.88  viol=NaN  (27.1s)
+
+=== Summary ===
+ fit_model K_hat K_post_mean    ari    vi    looic violation_rate time_sec
+       WST     2           2 0.5621 3.179 13940.37          0.496    434.7
+       SST     2           2 0.5796 3.107 13930.98          0.479    226.4
+     DCSBM     1           1 1.0000 2.585 13931.88            NaN     27.1
+
+Results saved to output/simulation/raw/misspec_K6v2_20260327_204339

@@ -1,0 +1,4 @@
+dataset,fit_model,n,K_hat,K_trace_mean,K_trace_sd,elpd,Delta_ELPD,psis_tail_share,time
+macaques_data,DCSBM,62,11,11,NA,-3093.6,0,0.025,496.2
+macaques_data,SST,62,10,10,NA,-3177,-83.40000000000009,0.005,1031.4
+macaques_data,WST,62,10,10,NA,-3336.3,-242.70000000000027,0.021,1184.4
