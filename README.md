@@ -1,17 +1,33 @@
-# Reproducing The Paper Results
+# Ordered Stochastic Block Models via Pólya--Gamma data augmentation
 
-This folder is a self-contained reproduction bundle for the manuscript figures,
-tables, and cached numerical results used by `ArXiv Submission.tex`.
+## Table of Contents
 
-Run commands from this folder:
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Bundle Contents](#bundle-contents)
+- [Entry Scripts](#entry-scripts)
+- [Regenerating Figures from Cached Results](#regenerating-figures-from-cached-results)
+- [Regenerating the Manuscript Tables](#regenerating-the-manuscript-tables)
+- [Full Reruns](#full-reruns)
+- [Manuscript Preview](#manuscript-preview)
+- [Label Update Note](#label-update-note)
+
+## Overview
+
+This directory is a self-contained reproduction bundle for the figures, tables,
+cached numerical results, and derived summaries used by *Ordered Stochastic
+Block Models via Pólya--Gamma data augmentation* (`ArXiv Submission.tex`).
+
+Run commands from this directory:
 
 ```sh
-cd "tex file/reproduce_paper_results"
+cd "tex file/Ordered Stochastic Block Model"
 ```
 
-The bundle includes cached MCMC results, post-processing outputs, CSV summaries,
-data files, and regenerated plots. This lets a reader rebuild every plot without
-rerunning the expensive MCMC. Full rerun entry points are also included.
+The bundle includes cached MCMC results, post-processing outputs, CSV
+summaries, data files, and regenerated plots. This allows the bundled figures
+and tables to be checked or rebuilt without rerunning the most expensive MCMC
+steps; full rerun entry points are also included.
 
 ## Requirements
 
@@ -29,7 +45,7 @@ install.packages(c(
 Some scripts run without optional packages by using fallbacks, but the list above
 matches the environment used to create the bundled results.
 
-## Folder Contents
+## Bundle Contents
 
 - `data/`: all empirical network data used by the application analysis.
 - `core/`, `helper_folder/`: model fitting and helper functions.
@@ -39,17 +55,17 @@ matches the environment used to create the bundled results.
 - `output/simulation/raw/`: simulation result CSVs used for ARI/VI figures.
 - `output/simulation/plots/2026-06-15_sst_labels/`: regenerated simulation plots with `SST` labels.
 - `output/paper/figures/application_run_20260529_110306_sst_labels/`: regenerated application figures with `SST` labels.
-- `paper_figures/all_figures/`: manuscript figure assets copied into the bundle; the preview index below shows how they map to the paper.
-- `paper_figures/updated plots/`: collected updated application and simulation plots.
+- `paper_figures/all_figures/`: manuscript figure assets copied into the bundle; the preview index below shows how they map to the numbered environments in `ArXiv Submission.tex`.
+- `paper_figures/updated plots/`: collected updated application and simulation plots used for the ArXiv submission build.
 
-## Renamed Entry Scripts
+## Entry Scripts
 
 - `scripts/01_run_application_mcmc.R`: full application MCMC run.
 - `scripts/02_run_main_simulation_study.R`: full main simulation study.
 - `scripts/03_build_application_postprocessing_cube.R`: builds canonical z-hat/K/diagnostic cube from application fits.
-- `scripts/04_build_paper_tables.R`: rebuilds paper tables from cached application results.
-- `scripts/05_plot_paper_application_figures.R`: rebuilds application network figures and BT diagnostic plot.
-- `scripts/06_plot_simulation_recovery_figures.R`: rebuilds ARI/VI simulation figures.
+- `scripts/04_build_paper_tables.R`: rebuilds the application-side tabular outputs used by *Ordered Stochastic Block Models via Pólya--Gamma data augmentation* from cached application results.
+- `scripts/05_plot_paper_application_figures.R`: rebuilds the application-network figures and Bradley--Terry additivity diagnostic used by the ArXiv submission.
+- `scripts/06_plot_simulation_recovery_figures.R`: rebuilds the main-text and supplementary ARI/VI simulation figures.
 - `scripts/07_plot_support_geometry.R`: rebuilds support-geometry diagnostics.
 - `scripts/08_plot_mirrored_ocrp_diagnostics.R`: rebuilds mirrored OCRP prior diagnostics.
 - `scripts/09_build_bradley_terry_delta_plot.R`: rebuilds the BT additivity diagnostic only.
@@ -59,13 +75,13 @@ The copied `scripts/analysis`, `scripts/application`, `scripts/simulation`,
 `scripts/diagnostics`, and `scripts/testing` folders are dependencies for these
 entry points.
 
-## Fast Plot Reproduction
+## Regenerating Figures from Cached Results
 
 ### Application Network Figures
 
-These commands regenerate the application plots used in the manuscript without
-refitting models. The output folder name is intentionally separate from the
-cached manuscript copy.
+These commands regenerate the application figures used in *Ordered Stochastic
+Block Models via Pólya--Gamma data augmentation* without refitting models. The
+output folder name is intentionally separate from the cached manuscript copy.
 
 ```sh
 APP_RUN_DIR=output/application/raw/application_run_20260529_110306 \
@@ -74,9 +90,11 @@ APP_PAPER_TABLES_DIR=output/paper/tables/rebuilt_application_sst_labels \
 Rscript scripts/05_plot_paper_application_figures.R
 ```
 
-This reproduces the bighorn sheep tier-line comparison, the six application block-flow panels, and the Bradley-Terry additivity diagnostic.
+This reproduces the bighorn sheep tier-line comparison, the six application
+block-flow panels, and the Bradley--Terry additivity diagnostic.
 
-The manuscript currently uses the copies in `paper_figures/all_figures/`; the numbered preview table below shows the corresponding manuscript entries.
+The ArXiv submission currently uses the copies in `paper_figures/all_figures/`;
+the preview index below shows the corresponding entries in `ArXiv Submission.tex`.
 
 ### Simulation ARI/VI Figures
 
@@ -86,7 +104,9 @@ SIM_PLOTS_OUTPUT_DIR=output/simulation/plots/rebuilt_sst_labels \
 Rscript scripts/06_plot_simulation_recovery_figures.R
 ```
 
-This reproduces the WST/SST VI boxplots, the combined VI/ARI recovery plots, and the summary CSVs used to build them.
+This reproduces Figure 4 (`fig:vi-boxplot-wst`) together with the supplementary
+recovery figures `fig:vi-SST-gen` and `fig:ari-combined`, plus the summary CSVs
+used to build them.
 
 ### Support Geometry Figure
 
@@ -94,7 +114,7 @@ This reproduces the WST/SST VI boxplots, the combined VI/ARI recovery plots, and
 Rscript scripts/07_plot_support_geometry.R
 ```
 
-The paper uses the support-geometry figure, cached in
+This rebuilds Figure 2 (`fig:psi-geometries`), cached in
 `paper_figures/all_figures/` and `output/diagnostics/support_geometry/`.
 
 ### Mirrored OCRP Diagnostic Figures
@@ -107,8 +127,9 @@ This rebuilds the OCRP prior figures under `output/simulation/ocrp_tests_mirrore
 including the K prior, position profile, end-block, max-block, and equal-size
 diagnostics used by the supplement.
 
-## Rebuilding Tables
+## Regenerating the Manuscript Tables
 
+<a id="reproduce-manuscript-tables"></a>
 From cached application fits:
 
 ```sh
@@ -116,8 +137,24 @@ APP_RUN_DIR=output/application/raw/application_run_20260529_110306 \
 Rscript scripts/04_build_paper_tables.R
 ```
 
-This rebuilds model-selection, hierarchy-diagnostic, violation-rate, and
-application supplement tables under `output/paper/tables/application_run_20260529_110306/`.
+This rebuilds the application-side tabular outputs read by the submission via
+`\input{...}`: the model-comparison table (`tab:model-selection`), the
+hierarchy and violation summaries, the Bradley--Terry delta summary, and the
+application supplement tables, including `tab:application-cycle-diagnostics`,
+under `output/paper/tables/application_run_20260529_110306/`.
+
+<a id="reproduce-simulation-tables"></a>
+For the simulation tables in the preview index, rerun the downstream simulation
+analysis on the cached CSV:
+
+```sh
+SIM_RESULTS_PATH=output/simulation/raw/full_simulation_crossfit_final_DemoKvar_run_20260302_153429.csv \
+Rscript scripts/analysis/analyze_simulation.R
+```
+
+This rewrites the main-text and appendix simulation tables under
+`output/simulation/tables/`, including the Table 1 and Table 2 sources plus the
+supplementary scenario summaries.
 
 To rebuild only the Bradley-Terry additivity diagnostic:
 
@@ -147,6 +184,14 @@ Main simulation study:
 Rscript scripts/02_run_main_simulation_study.R
 ```
 
+After a full simulation rerun, refresh the downstream simulation figures and
+tables with:
+
+```sh
+SIM_RESULTS_PATH=output/simulation/raw/<new_simulation_results_csv> \
+Rscript scripts/analysis/analyze_simulation.R
+```
+
 After a full application rerun, use the new run directory in:
 
 ```sh
@@ -158,7 +203,7 @@ Then rerun the table and plot scripts above with the same `APP_RUN_DIR`.
 
 ## Manuscript Preview
 
-The numbering below follows the active figure and table environments in `ArXive Submission.tex`. Figures 1 and 3 are drawn directly in TeX, so their preview cells are textual rather than image thumbnails.
+The numbering below follows the active figure and table environments in `ArXiv Submission.tex`. Figures 1 and 3 are drawn directly in TeX, so their preview cells are textual rather than image thumbnails. The application-side tables in this index are regenerated from cached fits via [this paragraph](#reproduce-manuscript-tables); the simulation tables are refreshed via [this paragraph](#reproduce-simulation-tables).
 
 ### Main Text
 
@@ -191,5 +236,5 @@ The numbering below follows the active figure and table environments in `ArXive 
 ## Label Update Note
 
 The application and simulation plot scripts in this bundle use `SST` in figure
-labels after the geometric section of the paper. The old `Toeplitz SST` labels
-are not used in the regenerated application plots.
+labels after the geometric section of the ArXiv submission. The old `Toeplitz
+SST` labels are not used in the regenerated application plots.
