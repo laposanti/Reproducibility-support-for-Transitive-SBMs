@@ -39,7 +39,7 @@ matches the environment used to create the bundled results.
 - `output/simulation/raw/`: simulation result CSVs used for ARI/VI figures.
 - `output/simulation/plots/2026-06-15_sst_labels/`: regenerated simulation plots with `SST` labels.
 - `output/paper/figures/application_run_20260529_110306_sst_labels/`: regenerated application figures with `SST` labels.
-- `paper_figures/all_figures/`: exact figure files copied into the manuscript figure folder.
+- `paper_figures/all_figures/`: manuscript figure assets copied into the bundle; the preview index below shows how they map to the paper.
 - `paper_figures/updated plots/`: collected updated application and simulation plots.
 
 ## Renamed Entry Scripts
@@ -74,14 +74,9 @@ APP_PAPER_TABLES_DIR=output/paper/tables/rebuilt_application_sst_labels \
 Rscript scripts/05_plot_paper_application_figures.R
 ```
 
-This reproduces:
+This reproduces the bighorn sheep tier-line comparison, the six application block-flow panels, and the Bradley-Terry additivity diagnostic.
 
-- `moreno_sheep_SST_network_tier_line.png`
-- `moreno_sheep_DCSBM_network_tier_line.png`
-- `<dataset>_combined_block_networks_clean.pdf/png` for all six datasets
-- `bt_delta_wst_applications.pdf/png`
-
-The manuscript currently uses the copies in `paper_figures/all_figures/`.
+The manuscript currently uses the copies in `paper_figures/all_figures/`; the numbered preview table below shows the corresponding manuscript entries.
 
 ### Simulation ARI/VI Figures
 
@@ -91,13 +86,7 @@ SIM_PLOTS_OUTPUT_DIR=output/simulation/plots/rebuilt_sst_labels \
 Rscript scripts/06_plot_simulation_recovery_figures.R
 ```
 
-This reproduces:
-
-- `vi_boxplot_WST_gen.pdf/png`
-- `vi_boxplot_SST_gen.pdf/png`
-- `vi_boxplot_combined.pdf/png`
-- `ari_boxplot_combined.pdf/png`
-- `ari_boxplot_all.*`, `vi_boxplot_all.*`, and summary CSVs
+This reproduces the WST/SST VI boxplots, the combined VI/ARI recovery plots, and the summary CSVs used to build them.
 
 ### Support Geometry Figure
 
@@ -105,7 +94,7 @@ This reproduces:
 Rscript scripts/07_plot_support_geometry.R
 ```
 
-The paper uses `support_3d_shaded_geometry.png`, cached in
+The paper uses the support-geometry figure, cached in
 `paper_figures/all_figures/` and `output/diagnostics/support_geometry/`.
 
 ### Mirrored OCRP Diagnostic Figures
@@ -167,20 +156,37 @@ Rscript scripts/03_build_application_postprocessing_cube.R
 
 Then rerun the table and plot scripts above with the same `APP_RUN_DIR`.
 
-## Figure-To-File Map
+## Manuscript Preview
 
-- Main simulation recovery figure: `scripts/06_plot_simulation_recovery_figures.R`
-  from `output/simulation/raw/full_simulation_crossfit_final_DemoKvar_run_20260302_153429.csv`.
-- Main bighorn sheep tier-line figure: `scripts/05_plot_paper_application_figures.R`
-  from `output/application/raw/application_run_20260529_110306/` and
-  `output/posterior_post_processing/application_run_20260529_110306/`.
-- Application block-flow figures: same application plot script and cached run.
-- Support geometry figure: `scripts/07_plot_support_geometry.R`.
-- BT additivity diagnostic: `scripts/09_build_bradley_terry_delta_plot.R`, also
-  called by `scripts/05_plot_paper_application_figures.R`.
-- Mirrored OCRP prior figures: `scripts/08_plot_mirrored_ocrp_diagnostics.R`.
-- Prior satisfaction-rate figure: cached as
-  `paper_figures/all_figures/satisfaction_rate.png`.
+The numbering below follows the active figure and table environments in `ArXive Submission.tex`. Figures 1 and 3 are drawn directly in TeX, so their preview cells are textual rather than image thumbnails.
+
+### Main Text
+
+| No. | LaTeX label | Preview | Summary |
+| --- | --- | --- | --- |
+| Figure 1 | `fig:wst-sst-side-by-side` | TeX matrix sketch: WST uses a blue upper triangle, Toeplitz SST uses distance-colored upper triangle, and the lower triangle shows the reversed probabilities. | WST vs Toeplitz SST comparison. |
+| Figure 2 | `fig:psi-geometries` | <img src="output/paper/figures/application_run_20260529_110306_sst_labels/support_3d_shaded_geometry.png" width="220" alt="Support geometry"> | Support geometry in psi-space for WST, SST, Toeplitz SST, and LST. |
+| Figure 3 | `fig:dag-osbm-generative` | TeX DAG + algorithm: hyperparameters feed kappa, psi, eta, and z; these generate Poisson counts N and observed edges A. | OSBM generative process. |
+| Table 1 | `tab:sim-main-two-scenarios` | Sparse weak: Khat = 5.75/5.25/3.50, VI = 1.57/1.61/2.15 (SST-generated) and 1.70/1.64/2.25 (WST-generated).<br>Dense strong: Khat = 8.00/8.00/7.50, VI = 0.00/0.00/0.12 and 0.00/0.00/0.06. | Two representative K* = 8 simulation scenarios. |
+| Table 2 | `tab:sim-main-two-scenarios-loo` | Sparse weak: best LOOIC is 5425 for SST-generated and 5348 for WST-generated.<br>Dense strong: best LOOIC is 13083 for SST-generated and 12103 for WST-generated. | Compact predictive comparison for the same scenarios. |
+| Figure 4 | `fig:vi-boxplot-wst` | <img src="output/simulation/plots/2026-06-15_sst_labels/vi_boxplot_WST_gen.png" width="160" alt="WST VI"> <img src="output/simulation/plots/2026-06-15_sst_labels/vi_boxplot_SST_gen.png" width="160" alt="SST VI"> | VI recovery boxplots for WST-generated and SST-generated data. |
+| Table 3 | `tab:datasets` | Dominance, citation, and friendship edge meanings across six datasets; n = 28, 35, 45, 47, 62, 70. | Directed weighted application networks and their edge meanings. |
+| Figure 5 | `fig:tier_line_plot` | <img src="output/paper/figures/application_run_20260529_110306_sst_labels/moreno_sheep_SST_network_tier_line.png" width="160" alt="SST sheep"> <img src="output/paper/figures/application_run_20260529_110306_sst_labels/moreno_sheep_DCSBM_network_tier_line.png" width="160" alt="DC-SBM sheep"> | Bighorn sheep partition point estimates under SST and DC-SBM. |
+| Table 4 | `tab:model-selection` | Winners by dataset: SST on sheep, goats, and high school; WST on hyenas; DC-SBM on journals and macaques. | Posterior model-comparison summary. |
+| Figure 6 | `fig:block-flow-animal` | <img src="output/paper/figures/application_run_20260529_110306_sst_labels/strauss_2019b_combined_block_networks_clean.png" width="220" alt="Hyenas block-flow"> | Empirical forward share for the spotted hyenas network. |
+| Figure 7 | `fig:block-flow-human` | <img src="output/paper/figures/application_run_20260529_110306_sst_labels/high_school_combined_block_networks_clean.png" width="220" alt="High-school block-flow"> | Empirical forward share matrices for the high-school dataset. |
+
+### Supplement
+
+| No. | LaTeX label | Preview | Summary |
+| --- | --- | --- | --- |
+| Table 5 | `tab:sim_dcsbm_gnedin_summary` | K_true = 3, 5, 7 -> mean ARI = 1 and mean Khat = 3, 5, 7. | DC-SBM sampler sanity check. |
+| Figure 8 | `fig:vi-SST-gen` | <img src="output/simulation/plots/2026-06-15_sst_labels/vi_boxplot_SST_gen.png" width="220" alt="SST VI supplement"> | SST-generated VI recovery across density and hierarchy settings. |
+| Figure 9 | `fig:ari-combined` | <img src="output/simulation/plots/2026-06-15_sst_labels/ari_boxplot_combined.png" width="220" alt="ARI supplement"> | Adjusted Rand Index recovery for SST and WST scenarios. |
+| Table 6 | `tab:sim-mcmc-convergence` | Median interval width: WST 0.002, SST 0.004, DC < 0.001; most runs are below 0.05. | Violation-rate convergence diagnostic. |
+| Table 7 | `tab:supp-small-sim-sensitivity` | Simulated SST is most stable under the default prior; sheep backward-flow and inferred block count shift as the prior tightens. | Prior sensitivity check. |
+| Table 8 | `tab:sim-misspec` | WST and SST collapse to Khat = 2 and NVI = 0.33; DC-SBM recovers Khat = 5 and NVI = 0, with LOOIC about 11,867 vs about 13,000. | Misspecified non-hierarchical simulation. |
+| Table 9 | `tab:application-cycle-diagnostics` | Cycle diagnostics across sheep, hyenas, goats, journals, macaques, and high school; the ordered fits are mostly acyclic, while DC-SBM shows more cycles. | Application point-estimate cycle diagnostics. |
 
 ## Label Update Note
 
