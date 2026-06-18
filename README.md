@@ -1,4 +1,4 @@
-# Ordered Stochastic Block Models via Pólya--Gamma data augmentation
+# Ordering Stochastic Block Models via prior transitivity
 
 ## Table of Contents
 
