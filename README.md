@@ -6,11 +6,6 @@ This folder is the paper-facing miniature of the larger repository. The main rep
 
 ## Before you start
 
-Run commands from this folder:
-
-```sh
-cd "tex file/Ordered Stochastic Block Model"
-```
 
 Use R with the packages used by the bundle scripts, in particular:
 
