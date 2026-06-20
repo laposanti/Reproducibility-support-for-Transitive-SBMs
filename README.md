@@ -1,6 +1,6 @@
 # Transitive SBM
 
-Standalone reproduction bundle for the manuscript *Ordered Stochastic Block Models via Polya-Gamma data augmentation*.
+Standalone reproduction bundle for the manuscript *Ordering Stochastic Block Models via prior transitivity*.
 
 This folder is the paper-facing miniature of the larger repository. The main repository itself stays unchanged, but this bundle should be read as the standalone `Transitive SBM` reproduction package.
 
