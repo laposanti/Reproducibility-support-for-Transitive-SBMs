@@ -21,12 +21,13 @@ sim_results_path <- Sys.getenv("SIM_RESULTS_PATH", unset = "")
 compact_results_path <- if (nzchar(sim_results_path)) {
   sim_results_path
 } else {
-  Sys.getenv(
-    "COMPACT_RESULTS_PATH",
-    bundle_defaults$canonical_simulation_results_csv
-  )
+  Sys.getenv("COMPACT_RESULTS_PATH", unset = "")
 }
-results_path <- Sys.getenv("RESULTS_PATH", compact_results_path)
+results_path <- Sys.getenv("RESULTS_PATH", unset = "")
+if (!nzchar(results_path)) results_path <- compact_results_path
+if (!nzchar(results_path)) {
+  results_path <- bundle_resolve_simulation_results_csv(must_exist = TRUE)
+}
 out_dir_main <- Sys.getenv("SIM_TABLES_OUTPUT_DIR", "output/simulation/tables")
 out_dir_appx <- file.path(out_dir_main, "appendix")
 digits_small <- 3

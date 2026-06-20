@@ -15,7 +15,7 @@ get_bundle_root <- function() {
   if (!length(file_arg)) {
     return(normalizePath(wd, winslash = "/", mustWork = TRUE))
   }
-  script_path <- normalizePath(sub("^--file=", "", file_arg[1L]),
+  script_path <- normalizePath(gsub("~\\+~", " ", sub("^--file=", "", file_arg[1L])),
                                winslash = "/", mustWork = TRUE)
   normalizePath(file.path(dirname(script_path), "../.."),
                 winslash = "/", mustWork = TRUE)
@@ -29,10 +29,10 @@ library(tidyr)
 library(kableExtra)
 library(ggplot2)
 library(glue)
-sim_file <- Sys.getenv(
-  "SIM_RESULTS_PATH",
-  bundle_defaults$canonical_simulation_results_csv
-)
+sim_file <- Sys.getenv("SIM_RESULTS_PATH", unset = "")
+if (!nzchar(sim_file)) {
+  sim_file <- bundle_resolve_simulation_results_csv(must_exist = TRUE)
+}
 
 sim_raw <- read.csv(sim_file, stringsAsFactors = FALSE)
 
@@ -486,22 +486,30 @@ for (gen in c("SST", "WST")) {
 # 5.1 ARI by K_true, facetted by (hierch, kappa_mean)
 # -------------------------------------------------------------------
 
-Ari_boxplot = sim %>%
-  filter(gen_model == "SST") %>%
-  ggplot(aes(x = factor(K_true),
-             y = ari,
-             group = fit_model,
-             colour = fit_model)) +
-  geom_boxplot(outlier.alpha = 0.3) +
-  facet_wrap(~ interaction(hierch, kappa_mean)) +
-  labs(
-    x = expression(K^"*"),
-    y = "ARI",
-    colour = "Fitted model",
-    title = "Partition recovery (ARI) under SST generative model"
+sst_ari_rows <- sim %>% filter(gen_model == "SST")
+if (nrow(sst_ari_rows) > 0L) {
+  Ari_boxplot <- ggplot(
+    sst_ari_rows,
+    aes(
+      x = factor(K_true),
+      y = ari,
+      group = fit_model,
+      colour = fit_model
+    )
   ) +
-  theme_bw()
-ggsave("./output/simulation/plots/ari_sst.png",Ari_boxplot)
+    geom_boxplot(outlier.alpha = 0.3) +
+    facet_wrap(~ interaction(hierch, kappa_mean)) +
+    labs(
+      x = expression(K^"*"),
+      y = "ARI",
+      colour = "Fitted model",
+      title = "Partition recovery (ARI) under SST generative model"
+    ) +
+    theme_bw()
+  ggsave("./output/simulation/plots/ari_sst.png", Ari_boxplot)
+} else {
+  message("Skipping ari_sst.png because the selected simulation results contain no SST-generated rows.")
+}
 
 
 

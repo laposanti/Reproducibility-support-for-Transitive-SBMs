@@ -1,4 +1,0 @@
-Gen,$K^\star$,Density,Hierarchy,Model,Reps,ELPD mean (SD),$\Delta$ELPD mean (SD),ELPD wins,mean VI,mean $\hat K$,mean PSIS $k>0.7$
-WST,4,kappa_5,hetero,SST,2,-2705.3 (56.1),-191.1 (6.7),0/2,0.000,4.00,0.000
-WST,4,kappa_5,hetero,WST,2,-2517.3 (59.5),-3.1 (3.2),0/2,0.000,4.00,0.000
-WST,4,kappa_5,hetero,DC-SBM,2,-2514.2 (62.7),0.0 (0.0),2/2,0.000,4.00,0.000

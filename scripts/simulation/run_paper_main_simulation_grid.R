@@ -19,7 +19,7 @@ get_repo_root <- function(relative_to_script = "../..") {
   if (!length(file_arg)) {
     return(normalizePath(wd, winslash = "/", mustWork = TRUE))
   }
-  script_path <- normalizePath(sub("^--file=", "", file_arg[1L]),
+  script_path <- normalizePath(gsub("~\\+~", " ", sub("^--file=", "", file_arg[1L])),
                                winslash = "/", mustWork = TRUE)
   normalizePath(file.path(dirname(script_path), relative_to_script),
                 winslash = "/", mustWork = TRUE)
@@ -44,18 +44,14 @@ library(Rcpp)
 
 # --- Load your existing helpers (unchanged) ---
 
-source("./helper_folder/sim_study_helper.R")
-source("./helper_folder/helper.R")
-source("./helper_folder/transitivity_check_helper.R")
+source("./helper_folder/simulation/simulation_study_helpers.R")
+source("./helper_folder/models/ordered_sbm/shared_sampler_helpers.R")
+source("./helper_folder/diagnostics/transitivity_diagnostics.R")
 source("./core/DCSBM_varK.R")        # fit_dcsbm, dcsbm_relabel, etc.
-source("./helper_folder/SST_helpers.R")
-source("./helper_folder/WST_helpers.R")
-source("./helper_folder/Hyper_setup.R")
+source("./helper_folder/models/ordered_sbm/sst_helpers.R")
+source("./helper_folder/models/ordered_sbm/wst_helpers.R")
+source("./helper_folder/config/hyperparameter_setup.R")
 source("./core/transitive_sbm_sampler.R")
-
-# sign and logistic helpers (just in case)
-sgn      <- function(x) ifelse(x > 0, 1L, ifelse(x < 0, -1L, 0L))
-logistic <- function(x) 1 / (1 + exp(-x))
 
 ############################################################
 ## 1. Generative priors: kappa, psi_WST, psi_SST (mean/var)
@@ -112,30 +108,6 @@ sample_psi_sst_prior <- function(K, mu_psi, var_psi) {
     sd   = tau_delta
   )
   cumsum(deltas)
-}
-
-############################################################
-## 2. Hyperparameters for OSBM (principled Gibbs calibration)
-############################################################
-
-compute_dc_sbm_volume_priors <- function(A, a_lambda = 1) {
-  
-  # empirical mean intensity
-  mean_lambda <- mean(A[A > 0])  # or: mean(A), or mean(A[A != 0])
-  # If network is very sparse, you may want mean(A) instead.
-  
-  if (!is.finite(mean_lambda) || mean_lambda <= 0) {
-    mean_lambda <- 1e-6
-  }
-  
-  # scale-matching rate
-  b_lambda <- a_lambda / mean_lambda
-  
-  list(
-    a_lambda = a_lambda,
-    b_lambda = b_lambda,
-    mean_lambda = mean_lambda
-  )
 }
 
 demo_osbm_partition_prior <- toupper(trimws(Sys.getenv("DEMOKVAR_OSBM_PARTITION_PRIOR", unset = "OCRP")))
@@ -444,7 +416,8 @@ hierarchy_specs <- data.frame(
 )
 
 gen_models <- c("SST", "WST")
-n_rep      <- 4
+# Keep the default paper reproduction lightweight enough for a fresh rerun.
+n_rep      <- 3
 n_items    <- 60
 
 run_start_time <- Sys.time()
@@ -535,6 +508,9 @@ if (!is.na(env_cores) && env_cores >= 1L) {
   n_cores <- parallel::detectCores(logical = TRUE)
 }
 
+if (is.na(n_cores) || n_cores < 1L) {
+  n_cores <- 1L
+}
 n_cores <- max(1L, min(n_cores, nrow(task_grid)))
 
 message("Using ", n_cores, " cores.")

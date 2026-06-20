@@ -1,4 +1,0 @@
-"dataset","fit_model","K_hat","K_mean","K_lo","K_hi","elpd_loo","p_loo","looic","pk_max","pk_bad","b_kappa","time_sec","note"
-"mountain_goats","WST",4,4.47,3,6,-1349.5,143.6,2699,1.67,0.025,1,353.1,NA
-"mountain_goats","SST",6,6.68,6,8,-1253.6,141.3,2507.1,1.963,0.036,5,906.6,NA
-"mountain_goats","DCSBM",4,4.75,4,6,-1295.4,144.9,2590.8,2.175,0.134,NA,181.3,NA

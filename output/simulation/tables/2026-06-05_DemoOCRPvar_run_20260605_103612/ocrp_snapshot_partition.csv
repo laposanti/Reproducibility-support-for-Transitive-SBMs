@@ -1,7 +1,0 @@
-Gen,$K^\star$,Density,Hierarchy,Rep,Model,$\hat K$,$E[K\mid y]$,ARI,VI,NVI,OCRP tries,true block sizes
-SST,8,kappa_0.25,app_sparse,1,DC-SBM,4,3.91,0.847,2.308,0.769,140,3;4;17;5;3;20;4;8
-SST,8,kappa_0.25,app_sparse,1,SST,6,6.96,0.742,1.508,0.503,140,3;4;17;5;3;20;4;8
-SST,8,kappa_0.25,app_sparse,1,WST,7,7.35,0.689,1.393,0.464,140,3;4;17;5;3;20;4;8
-WST,8,kappa_0.25,app_sparse,1,DC-SBM,4,4.48,0.605,1.450,0.483,495,4;6;3;11;8;9;17;6
-WST,8,kappa_0.25,app_sparse,1,SST,4,5.63,0.605,1.320,0.440,495,4;6;3;11;8;9;17;6
-WST,8,kappa_0.25,app_sparse,1,WST,4,5.56,0.605,1.450,0.483,495,4;6;3;11;8;9;17;6

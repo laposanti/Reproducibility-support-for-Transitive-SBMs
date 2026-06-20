@@ -1,5 +1,0 @@
-run_id: application_run_20260529_110306
-run_dir: /Users/lapo_santi/Desktop/Nial/polya-transitive-sbm/output/application/raw/application_run_20260529_110306
-generated_by: scripts/analysis/build_bt_delta_summary.R
-generated_at: 2026-06-15 15:59:22 IST
-R_version: R version 4.5.2 (2025-10-31)

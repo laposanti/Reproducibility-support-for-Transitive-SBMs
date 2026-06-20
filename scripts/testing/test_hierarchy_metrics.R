@@ -1,7 +1,16 @@
 #!/usr/bin/env Rscript
 
-setwd("/Users/lapo_santi/Desktop/Nial/polya-transitive-sbm")
-source("helper_folder/transitivity_check_helper.R")
+#!/usr/bin/env Rscript
+# Validate the core hierarchy metrics on small hand-checkable examples.
+
+script_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+if (length(script_arg)) {
+  script_path <- normalizePath(gsub("~\\+~", " ", sub("^--file=", "", script_arg[1L])))
+  repo_root <- normalizePath(file.path(dirname(script_path), "..", ".."))
+  setwd(repo_root)
+}
+
+source("helper_folder/diagnostics/transitivity_diagnostics.R")
 
 expect_close <- function(value, target, tolerance = 1e-12, label = "value") {
   if (is.na(value) || abs(value - target) > tolerance) {

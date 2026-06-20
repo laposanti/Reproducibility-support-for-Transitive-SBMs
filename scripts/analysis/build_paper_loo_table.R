@@ -31,17 +31,16 @@ suppressPackageStartupMessages({
 })
 
 suppressPackageStartupMessages({
-  source("helper_folder/sim_study_helper.R", local = TRUE)
+  source("helper_folder/simulation/simulation_study_helpers.R", local = TRUE)
   source("scripts/analysis/osbm_visualization.R", local = TRUE)
 })
+source("scripts/bundle_defaults.R", local = TRUE)
 
 # ---- 1. Resolve paths ------------------------------------------------------
-RUN_DIR <- Sys.getenv("APP_RUN_DIR", unset = "")
-if (!nzchar(RUN_DIR)) {
-  args <- commandArgs(trailingOnly = TRUE)
-  if (length(args) >= 1L) RUN_DIR <- args[[1]]
-}
-stopifnot(nzchar(RUN_DIR), dir.exists(RUN_DIR))
+run_arg <- ""
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) >= 1L) run_arg <- args[[1]]
+RUN_DIR <- bundle_resolve_application_run_dir(run_dir = run_arg, must_exist = TRUE)
 
 run_id <- basename(normalizePath(RUN_DIR))
 
@@ -190,7 +189,13 @@ fmt_num  <- function(x, d = 1) ifelse(is.na(x),
                                       formatC(round(x, d), format = "f",
                                               big.mark = "{,}", digits = d))
 fmt_K    <- function(hat, lo, hi) {
-  sprintf("$%d\\;[%d,%d]$", hat, lo, hi)
+  if (any(is.na(c(hat, lo, hi)))) {
+    return("")
+  }
+  sprintf("$%s\\;[%s,%s]$",
+          fmt_num(hat, 0),
+          fmt_num(lo, 0),
+          fmt_num(hi, 0))
 }
 
 # ---- 6. Build LaTeX rows ---------------------------------------------------

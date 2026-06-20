@@ -1,7 +1,0 @@
-dataset,fit_model,n,K_hat,K_trace_mean,elpd,psis_tail_share,hierarchy_energy_mean,curl_energy_mean,bf_wst_0,bf_sst_0,bf_sst_wst,violation_rate_mean,violation_rate_lo,violation_rate_hi
-citations_data,DCSBM,47,11,11,-6092.1,0.041,NA,NA,NA,NA,NA,NA,NA,NA
-high_school,SST,70,11,11,-1219.7,0.118,NA,NA,NA,NA,NA,NA,NA,NA
-macaques_data,DCSBM,62,11,11,-3093.6,0.025,NA,NA,NA,NA,NA,NA,NA,NA
-moreno_sheep,SST,28,6,6,-884.9,0.053,NA,NA,NA,NA,NA,NA,NA,NA
-mountain_goats,SST,45,8,8,-1257.6,0.046,NA,NA,NA,NA,NA,NA,NA,NA
-strauss_2019b,WST,35,14,14,-1942.9,0.128,NA,NA,NA,NA,NA,NA,NA,NA

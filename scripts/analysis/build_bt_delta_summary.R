@@ -3,7 +3,8 @@
 # build_bt_delta_summary.R
 #
 # Computes Bradley--Terry additivity diagnostics from WST posterior psi draws
-# across the six application datasets. For each dataset we compute
+# across the bundled application datasets that are present in the selected run.
+# For each dataset we compute
 #   Delta_{k l m} = psi_{k m} - psi_{k l} - psi_{l m},   k < l < m
 # and summarise the draw-level mean Delta with a 95% interval.
 #
@@ -24,14 +25,15 @@ suppressPackageStartupMessages({
   library(readr)
   library(dplyr)
 })
+source("scripts/bundle_defaults.R", local = TRUE)
 
 # ---- Resolve paths ----------------------------------------------------------
-RUN_DIR <- Sys.getenv("APP_RUN_DIR", unset = "")
-if (!nzchar(RUN_DIR)) {
-  args <- commandArgs(trailingOnly = TRUE)
-  if (length(args) >= 1L) RUN_DIR <- args[[1]]
+run_arg <- ""
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) >= 1L) {
+  run_arg <- args[[1]]
 }
-stopifnot(nzchar(RUN_DIR), dir.exists(RUN_DIR))
+RUN_DIR <- bundle_resolve_application_run_dir(run_dir = run_arg, must_exist = TRUE)
 
 run_id <- basename(normalizePath(RUN_DIR))
 
@@ -117,13 +119,28 @@ compute_delta_summary <- function(fit_path) {
 }
 
 # ---- Compute summaries ------------------------------------------------------
-res <- datasets %>%
+available_datasets <- datasets %>%
+  mutate(fit_path = file.path(RUN_DIR, paste0(dataset, "_WST_fit.rds"))) %>%
+  filter(file.exists(fit_path))
+
+if (!nrow(available_datasets)) {
+  stop("No WST application fits were found in ", RUN_DIR, call. = FALSE)
+}
+
+if (nrow(available_datasets) < nrow(datasets)) {
+  message(
+    "Skipping missing WST fits for: ",
+    paste(setdiff(datasets$dataset, available_datasets$dataset), collapse = ", ")
+  )
+}
+
+res <- available_datasets %>%
   rowwise() %>%
   do({
-    ds <- .$dataset
-    fit_path <- file.path(RUN_DIR, paste0(ds, "_WST_fit.rds"))
-    stopifnot(file.exists(fit_path))
-    dplyr::bind_cols(tibble::tibble(dataset = ds), compute_delta_summary(fit_path))
+    dplyr::bind_cols(
+      tibble::tibble(dataset = .$dataset),
+      compute_delta_summary(.$fit_path)
+    )
   }) %>%
   ungroup() %>%
   left_join(datasets, by = "dataset") %>%

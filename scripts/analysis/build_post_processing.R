@@ -39,16 +39,10 @@ suppressPackageStartupMessages({
   library(readr)
   library(tibble)
 })
+source("scripts/bundle_defaults.R", local = TRUE)
 
 # --- Resolve run dir --------------------------------------------------------
-RUN_DIR <- Sys.getenv("APP_RUN_DIR", unset = "")
-if (!nzchar(RUN_DIR)) {
-  cur <- "output/paper/figures/current"
-  if (file.exists(cur))
-    RUN_DIR <- file.path("output/application/raw", basename(Sys.readlink(cur)))
-}
-if (!nzchar(RUN_DIR) || !dir.exists(RUN_DIR))
-  stop("Set APP_RUN_DIR=output/application/raw/<run_id>; got '", RUN_DIR, "'.")
+RUN_DIR <- bundle_resolve_application_run_dir(must_exist = TRUE)
 
 RUN_ID  <- basename(RUN_DIR)
 CUBE    <- file.path("output", "posterior_post_processing", RUN_ID)
@@ -69,7 +63,7 @@ cat("============================================================\n\n")
 
 # --- Source canonical machinery --------------------------------------------
 source("scripts/analysis/osbm_visualization.R", local = TRUE) # for get_z_hat_from_draws, .compact_labels_row, compute_block_scores
-source("helper_folder/transitivity_check_helper.R", local = TRUE) # violation_rate_zhat etc.
+source("helper_folder/diagnostics/transitivity_diagnostics.R", local = TRUE) # violation_rate_zhat etc.
 source("scripts/analysis/post_processing_helpers.R", local = TRUE)
 
 # --- Locate fits + raw adjacency -------------------------------------------

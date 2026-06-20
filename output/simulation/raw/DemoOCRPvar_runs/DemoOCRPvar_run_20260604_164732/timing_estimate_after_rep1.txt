@@ -1,9 +1,0 @@
-run_id: DemoOCRPvar_run_20260604_164732
-first_rep_tasks: 1
-cores: 1
-first_rep_elapsed_seconds: 2.413
-estimated_total_seconds: 2.413
-estimated_remaining_seconds_after_rep1: 0
-estimated_total_hours: 0.001
-estimated_remaining_hours_after_rep1: 0
-snapshot_csv: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260604_164732/snapshot_after_rep1_DemoOCRPvar_run_20260604_164732.csv

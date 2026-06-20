@@ -63,7 +63,7 @@ summarise_K_trace <- function(K_trace) {
 }
 
 # Canonical violation stats for a single z_hat against adjacency A.
-# Mirrors helper_folder/transitivity_check_helper.R: an edge is a violation
+# Mirrors helper_folder/diagnostics/transitivity_diagnostics.R: an edge is a violation
 # iff z[i] > z[j] for a directed edge i -> j with z[i] != z[j].
 compute_zhat_violation_stats <- function(A, z_hat) {
   if (inherits(A, "Matrix")) A <- as.matrix(A)
@@ -105,10 +105,8 @@ read_cube_meta <- function(run_dir = NULL) {
   if (is.null(run_dir) || !nzchar(run_dir))
     run_dir <- Sys.getenv("APP_RUN_DIR", unset = "")
   if (!nzchar(run_dir)) {
-    cur <- "output/paper/figures/current"
-    if (file.exists(cur))
-      run_dir <- file.path("output/application/raw",
-                           basename(Sys.readlink(cur)))
+    source("scripts/bundle_defaults.R", local = TRUE)
+    run_dir <- bundle_resolve_application_run_dir(must_exist = TRUE)
   }
   if (!nzchar(run_dir) || !dir.exists(run_dir))
     stop("read_cube_meta: cannot resolve run dir.")

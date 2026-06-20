@@ -1,4 +1,0 @@
-dataset,fit_model,n,K_hat,K_trace_mean,K_trace_sd,elpd,Delta_ELPD,psis_tail_share,time
-high_school,SST,70,11,11,NA,-1219.7,0,0.118,886.8
-high_school,WST,70,9,9,NA,-1228.2,-8.5,0.191,911.5
-high_school,DCSBM,70,8,8,NA,-1370.1,-150.39999999999986,0.235,335.2

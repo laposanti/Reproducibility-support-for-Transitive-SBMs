@@ -32,11 +32,11 @@
 
 suppressPackageStartupMessages({
   source("scripts/analysis/osbm_visualization.R", chdir = FALSE)
-  source("helper_folder/transitivity_check_helper.R", chdir = FALSE)
+  source("helper_folder/diagnostics/transitivity_diagnostics.R", chdir = FALSE)
 })
+source("scripts/bundle_defaults.R", local = TRUE)
 
-RUN_DIR <- Sys.getenv("APP_RUN_DIR",
-  unset = "output/application/raw/application_run_20260414_104327")
+RUN_DIR <- bundle_resolve_application_run_dir(must_exist = TRUE)
 OUT_DIR <- file.path("output/paper/tables", basename(RUN_DIR))
 APP_TBL_DIR <- "output/application/tables"
 dir.create(OUT_DIR,     recursive = TRUE, showWarnings = FALSE)
@@ -106,7 +106,7 @@ for (ds in DATASETS) {
     #     relabelled by application.R (ECR for DCSBM; WST/SST untouched),
     #     so summarise_*_diagnostics is invoked on `fit` as-is, with the
     #     canonical z_hat (no ex-post strength reorder) for the *_zhat
-    #     fields. See helper_folder/transitivity_check_helper.R.
+    #     fields. See helper_folder/diagnostics/transitivity_diagnostics.R.
     rich_vec <- tryCatch({
       if (m %in% c("WST", "SST")) {
         summarise_osbm_diagnostics(

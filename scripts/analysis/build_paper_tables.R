@@ -14,7 +14,7 @@
 #   output/paper/tables/<run_id>/
 # and the `current/` symlink is repointed at <run_id>.
 #
-# Pipeline (canonical definitions in helper_folder/transitivity_check_helper.R):
+# Pipeline (canonical definitions in helper_folder/diagnostics/transitivity_diagnostics.R):
 #   1. build_paper_loo_table.R     -> model_selection_paper.{tex,csv}
 #   2. audit_hierarchy_synopsis.R  -> hierarchy_synopsis_audit.csv
 #                                     violation_rates_by_model.csv
@@ -35,16 +35,8 @@
 #   APP_BLESS_RUN=1 APP_RUN_DIR=... Rscript scripts/analysis/build_paper_tables.R
 # =============================================================================
 
-RUN_DIR <- Sys.getenv("APP_RUN_DIR", unset = "")
-if (!nzchar(RUN_DIR)) {
-  cur <- "output/paper/tables/current"
-  if (file.exists(cur)) {
-    RUN_DIR <- file.path("output/application/raw", basename(Sys.readlink(cur)))
-  }
-}
-if (!nzchar(RUN_DIR) || !dir.exists(RUN_DIR)) {
-  stop("Set APP_RUN_DIR=output/application/raw/<run_id>; got '", RUN_DIR, "'.")
-}
+source("scripts/bundle_defaults.R", local = TRUE)
+RUN_DIR <- bundle_resolve_application_run_dir(must_exist = TRUE)
 RUN_ID  <- basename(RUN_DIR)
 TAB_DIR <- file.path("output/paper/tables", RUN_ID)
 FIG_DIR <- file.path("output/paper/figures", RUN_ID)

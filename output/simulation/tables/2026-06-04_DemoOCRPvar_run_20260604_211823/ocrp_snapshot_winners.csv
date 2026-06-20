@@ -1,5 +1,0 @@
-Gen,$K^\star$,Density,Hierarchy,Rep,ELPD winner,VI winner,ARI winner,Exact K models,Block sizes,$\vartheta$
-SST,4,kappa_5,verystrong,1,SST,WST/SST/DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,10;10;10;10,1.00
-SST,4,kappa_5,verystrong,2,DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,10;10;10;10,1.00
-WST,4,kappa_5,verystrong,1,SST,WST/SST/DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,10;10;10;10,1.00
-WST,4,kappa_5,verystrong,2,SST,WST/SST/DC-SBM,WST/SST/DC-SBM,WST/SST/DC-SBM,10;10;10;10,1.00

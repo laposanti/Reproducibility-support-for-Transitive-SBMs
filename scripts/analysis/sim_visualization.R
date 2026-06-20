@@ -16,10 +16,10 @@ source("scripts/bundle_defaults.R", local = TRUE)
 # =============================================================================
 
 # Path to simulation results
-SIM_RESULTS_PATH <- Sys.getenv(
-  "SIM_RESULTS_PATH",
-  bundle_defaults$canonical_simulation_results_csv
-)
+SIM_RESULTS_PATH <- Sys.getenv("SIM_RESULTS_PATH", unset = "")
+if (!nzchar(SIM_RESULTS_PATH)) {
+  SIM_RESULTS_PATH <- bundle_resolve_simulation_results_csv(must_exist = TRUE)
+}
 
 # Output directory (override with SIM_PLOTS_OUTPUT_DIR)
 OUTPUT_DIR <- Sys.getenv("SIM_PLOTS_OUTPUT_DIR", "output/simulation/plots")

@@ -20,7 +20,7 @@ resolve_bundle_root <- function(relative_to_script = "../..") {
   if (!length(file_arg)) {
     return(normalizePath(wd, winslash = "/", mustWork = TRUE))
   }
-  script_path <- normalizePath(sub("^--file=", "", file_arg[1L]),
+  script_path <- normalizePath(gsub("~\\+~", " ", sub("^--file=", "", file_arg[1L])),
                                winslash = "/", mustWork = TRUE)
   normalizePath(file.path(dirname(script_path), relative_to_script),
                 winslash = "/", mustWork = TRUE)
@@ -54,12 +54,13 @@ suppressPackageStartupMessages({
   library(loo)
 })
 
-source("./helper_folder/helper.R")
-source("./helper_folder/SST_helpers.R")
-source("./helper_folder/WST_helpers.R")
-source("./helper_folder/Hyper_setup.R")
-source("./helper_folder/sim_study_helper.R")
-source("./helper_folder/transitivity_check_helper.R")
+source("./helper_folder/models/ordered_sbm/shared_sampler_helpers.R")
+source("./helper_folder/models/ordered_sbm/sst_helpers.R")
+source("./helper_folder/models/ordered_sbm/wst_helpers.R")
+source("./helper_folder/config/hyperparameter_setup.R")
+source("./helper_folder/io/application_data_loader.R")
+source("./helper_folder/simulation/simulation_study_helpers.R")
+source("./helper_folder/diagnostics/transitivity_diagnostics.R")
 source("./core/ppc_checks.R")
 source("./core/transitive_sbm_sampler.R")
 source("./core/DCSBM_varK.R")
@@ -115,90 +116,7 @@ cat(sprintf("Datasets: %s\n\n", paste(datasets, collapse = ", ")))
 # Data loader
 # ======================================================================
 choose_dataset <- function(dataset = DATASET_CHOICES[1]) {
-  dataset <- match.arg(dataset, choices = DATASET_CHOICES)
-  if (dataset == "mountain_goats") {
-    matrix_files <- list.files("./data/ShizukaMcDonald_Data",
-                               full.names = TRUE, pattern = "[.]csv$")
-    n_each <- vapply(matrix_files, function(f) nrow(read.csv(f, row.names = 1)),
-                     FUN.VALUE = integer(1))
-    A <- as.matrix(read.csv(matrix_files[which.max(n_each)],
-                            row.names = 1, check.names = FALSE))
-  } else if (dataset == "citations_data") {
-    A <- read.csv("./data/Citations_application/cross-citation-matrix.csv",
-                  row.names = 1, header = TRUE, check.names = FALSE)
-    diag(A) <- 0
-  } else if (dataset == "macaques_data") {
-    edge_list <- read.table("./data/macaques/out.moreno.txt")
-    nodes <- sort(unique(c(edge_list[[1]], edge_list[[2]])))
-    A <- matrix(0L, length(nodes), length(nodes), dimnames = list(nodes, nodes))
-    for (i in seq_len(nrow(edge_list)))
-      A[edge_list[i, 1], edge_list[i, 2]] <- edge_list[i, "V3"]
-  } else if (dataset == "high_school") {
-    edges <- read.csv("./data/high-school/edges.csv",
-                      header = FALSE, comment.char = "#", strip.white = TRUE)
-    names(edges)[1:3] <- c("source", "target", "weight")
-    edges$source <- as.integer(edges$source)
-    edges$target <- as.integer(edges$target)
-    edges$weight <- as.integer(edges$weight)
-    if (min(edges$source, edges$target) == 0L) {
-      edges$source <- edges$source + 1L
-      edges$target <- edges$target + 1L
-    }
-    n_nodes <- max(c(edges$source, edges$target))
-    node_ids <- as.character(seq_len(n_nodes))
-    A <- matrix(0L, n_nodes, n_nodes, dimnames = list(node_ids, node_ids))
-    for (r in seq_len(nrow(edges))) {
-      i <- edges$source[r]; j <- edges$target[r]; w <- edges$weight[r]
-      if (w > 0L) A[i, j] <- A[i, j] + w
-    }
-    diag(A) <- 0L
-  } else if (dataset == "hiv1_data") {
-    A <- read.csv("./data/HIV1_collapsed_adjacency_matrix.csv",
-                  row.names = 1, header = TRUE, check.names = FALSE)
-    diag(A) <- 0
-  } else if (dataset == "moreno_sheep") {
-    edges <- read.csv("./data/moreno_sheep/edges.csv",
-                      comment.char = "#", strip.white = TRUE)
-    names(edges)[1:3] <- c("source", "target", "weight")
-    edges$source <- as.integer(edges$source)
-    edges$target <- as.integer(edges$target)
-    edges$weight <- as.integer(edges$weight)
-    if (min(edges$source, edges$target) == 0L) {
-      edges$source <- edges$source + 1L
-      edges$target <- edges$target + 1L
-    }
-    n_nodes <- max(c(edges$source, edges$target))
-    node_ids <- as.character(seq_len(n_nodes))
-    A <- matrix(0L, n_nodes, n_nodes, dimnames = list(node_ids, node_ids))
-    for (r in seq_len(nrow(edges))) {
-      i <- edges$source[r]; j <- edges$target[r]; w <- edges$weight[r]
-      if (w > 0L) A[i, j] <- A[i, j] + w
-    }
-    diag(A) <- 0L
-  } else if (dataset == "strauss_2019b") {
-    edges <- read.csv("./data/Strauss_2019b/edges.csv",
-                      comment.char = "#", strip.white = TRUE)
-    names(edges)[1:2] <- c("source", "target")
-    edges$source <- as.integer(edges$source)
-    edges$target <- as.integer(edges$target)
-    edges$weight <- 1L
-    if (min(edges$source, edges$target) == 0L) {
-      edges$source <- edges$source + 1L
-      edges$target <- edges$target + 1L
-    }
-    n_nodes <- max(c(edges$source, edges$target))
-    node_ids <- as.character(seq_len(n_nodes))
-    A <- matrix(0L, n_nodes, n_nodes, dimnames = list(node_ids, node_ids))
-    for (r in seq_len(nrow(edges))) {
-      i <- edges$source[r]; j <- edges$target[r]; w <- edges$weight[r]
-      if (w > 0L) A[i, j] <- A[i, j] + w
-    }
-    diag(A) <- 0L
-  }
-  A <- as.matrix(A)
-  stopifnot(nrow(A) == ncol(A))
-  colnames(A) <- rownames(A)
-  A
+  load_application_adjacency(match.arg(dataset, choices = DATASET_CHOICES))
 }
 
 # ======================================================================

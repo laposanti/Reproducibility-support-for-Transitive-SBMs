@@ -1,7 +1,0 @@
-clean_run_id: DemoOCRPvar_run_20260605_150110
-clean_run_dir: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_150110
-sparse_run_id: DemoOCRPvar_run_20260605_165336
-sparse_run_dir: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_165336
-wst_run_id: DemoOCRPvar_run_20260605_172715
-wst_run_dir: output/simulation/raw/DemoOCRPvar_runs/DemoOCRPvar_run_20260605_172715
-log_dir: output/simulation/logs/10rep_suite_20260605_150102

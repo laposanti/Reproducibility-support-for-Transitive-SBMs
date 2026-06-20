@@ -1,7 +1,0 @@
-"dataset","best_ordered_model","elpd_best_ordered","elpd_dcsbm","delta_elpd_ordered_minus_dcsbm","se_delta_elpd_ordered_vs_dcsbm","abs_t_ordered_vs_dcsbm","predictive_conclusion"
-"moreno_sheep","SST",-884.9,-927.9,43,17.87,2.40626748740907,"ordered predicts clearly better than DC-SBM"
-"strauss_2019b","WST",-1942.9,-2340.7,397.8,84.88,4.68661639962299,"ordered predicts clearly better than DC-SBM"
-"mountain_goats","SST",-1257.6,-1295.4,37.8000000000002,8.28,4.56521739130437,"ordered predicts clearly better than DC-SBM"
-"citations_data","WST",-6248.2,-6092.1,-156.099999999999,106.24,1.46931475903614,"ordered and DC-SBM are predictively close"
-"macaques_data","SST",-3177,-3093.6,-83.4000000000001,28.08,2.97008547008547,"DC-SBM predicts clearly better than ordered"
-"high_school","SST",-1219.7,-1370.1,150.4,29.27,5.13836692859583,"ordered predicts clearly better than DC-SBM"

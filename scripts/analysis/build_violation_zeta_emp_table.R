@@ -30,10 +30,8 @@ OVERVIEW <- Sys.getenv(
   "HIERARCHY_OVERVIEW_CSV",
   unset = "output/application/tables/hierarchy_diagnostics_overview.csv"
 )
-APP_RUN_DIR <- Sys.getenv(
-  "APP_RUN_DIR",
-  unset = "output/application/raw/application_run_20260414_104327"
-)
+source("scripts/bundle_defaults.R", local = TRUE)
+APP_RUN_DIR <- bundle_resolve_application_run_dir(must_exist = TRUE)
 run_id  <- basename(APP_RUN_DIR)
 OUT_DIR <- Sys.getenv(
   "APP_PAPER_TABLES_DIR",

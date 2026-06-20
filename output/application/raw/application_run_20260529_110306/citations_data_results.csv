@@ -1,4 +1,0 @@
-"dataset","fit_model","K_hat","K_mean","K_lo","K_hi","elpd_loo","p_loo","looic","pk_max","pk_bad","b_kappa","time_sec","note"
-"citations_data","WST",14,13.06,12,14,-6248.2,917.7,12496.3,2.453,0.062,1,5099.8,NA
-"citations_data","SST",5,5.04,5,6,-8676.9,1364.1,17353.9,19.573,0.07,5,999.5,NA
-"citations_data","DCSBM",11,11,11,11,-6092.1,577.9,12184.2,2.02,0.041,NA,266.3,NA

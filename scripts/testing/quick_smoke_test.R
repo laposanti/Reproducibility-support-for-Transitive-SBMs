@@ -1,12 +1,18 @@
 #!/usr/bin/env Rscript
-# Quick smoke test for WST + SST with mixing moves
-setwd("/Users/lapo_santi/Desktop/Nial/polya-transitive-sbm/")
+# Quick smoke test for the ordered-SBM samplers on tiny synthetic datasets.
 
-source("helper_folder/sim_study_helper.R")
-source("helper_folder/SST_helpers.R")
-source("helper_folder/WST_helpers.R")
-source("helper_folder/Hyper_setup.R")
-source("core/my_best_try_so_far.R")
+script_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+if (length(script_arg)) {
+  script_path <- normalizePath(gsub("~\\+~", " ", sub("^--file=", "", script_arg[1L])))
+  repo_root <- normalizePath(file.path(dirname(script_path), "..", ".."))
+  setwd(repo_root)
+}
+
+source("helper_folder/simulation/simulation_study_helpers.R")
+source("helper_folder/models/ordered_sbm/sst_helpers.R")
+source("helper_folder/models/ordered_sbm/wst_helpers.R")
+source("helper_folder/config/hyperparameter_setup.R")
+source("core/transitive_sbm_sampler.R")
 
 set.seed(42)
 n <- 30; K_true <- 3

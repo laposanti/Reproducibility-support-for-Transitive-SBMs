@@ -25,73 +25,20 @@ suppressPackageStartupMessages({
 })
 
 # Source transitivity check helpers (needed for violation & ordering diagnostics)
-source("helper_folder/transitivity_check_helper.R")
+source("helper_folder/diagnostics/transitivity_diagnostics.R")
+source("helper_folder/io/application_data_loader.R")
+source("scripts/bundle_defaults.R", local = TRUE)
 
 # --- Load adjacency matrix for a named dataset ---
 choose_dataset_local <- function(dataset) {
-  if (dataset == "mountain_goats") {
-    matrix_files <- list.files("./data/ShizukaMcDonald_Data",
-                               full.names = TRUE, pattern = "\\.csv$")
-    n_each <- vapply(matrix_files, function(f) nrow(read.csv(f, row.names = 1)),
-                     FUN.VALUE = integer(1))
-    A <- as.matrix(read.csv(matrix_files[which.max(n_each)],
-                            row.names = 1, check.names = FALSE))
-  } else if (dataset == "citations_data") {
-    A <- read.csv("./data/Citations_application/cross-citation-matrix.csv",
-                  row.names = 1, header = TRUE, check.names = FALSE)
-    diag(A) <- 0
-  } else if (dataset == "macaques_data") {
-    edge_list <- read.table("./data/macaques/out.moreno.txt")
-    nodes <- sort(unique(c(edge_list[[1]], edge_list[[2]])))
-    A <- matrix(0L, length(nodes), length(nodes), dimnames = list(nodes, nodes))
-    for (i in seq_len(nrow(edge_list))) {
-      A[edge_list[i, 1], edge_list[i, 2]] <- edge_list[i, "V3"]
-    }
-  } else if (dataset == "high_school") {
-    edge_list <- read.csv("./data/high-school/edges.csv", comment.char = "#", header = FALSE)
-    colnames(edge_list) <- c("source", "target", "weight")
-    nodes <- sort(unique(c(edge_list$source, edge_list$target)))
-    node_names <- as.character(nodes)
-    A <- matrix(0, length(nodes), length(nodes), dimnames = list(node_names, node_names))
-    for (i in seq_len(nrow(edge_list))) {
-      A[as.character(edge_list$source[i]), as.character(edge_list$target[i])] <- edge_list$weight[i]
-    }
-  } else if (dataset == "moreno_sheep") {
-    edge_list <- read.csv("./data/moreno_sheep/edges.csv", comment.char = "#", header = FALSE)
-    colnames(edge_list) <- c("source", "target", "weight")
-    nodes <- sort(unique(c(edge_list$source, edge_list$target)))
-    node_names <- as.character(nodes)
-    A <- matrix(0, length(nodes), length(nodes), dimnames = list(node_names, node_names))
-    for (i in seq_len(nrow(edge_list))) {
-      A[as.character(edge_list$source[i]), as.character(edge_list$target[i])] <- edge_list$weight[i]
-    }
-  } else if (dataset == "strauss_2019b") {
-    edge_list <- read.csv("./data/Strauss_2019b/edges.csv", comment.char = "#", header = FALSE)
-
-    colnames(edge_list) <- c("source", "target", "time", "date")
-    edge_agg <- aggregate(time ~ source + target, data = edge_list, FUN = length)
-    colnames(edge_agg) <- c("source", "target", "weight")
-    nodes <- sort(unique(c(edge_agg$source, edge_agg$target)))
-    node_names <- as.character(nodes)
-    A <- matrix(0, length(nodes), length(nodes), dimnames = list(node_names, node_names))
-    for (i in seq_len(nrow(edge_agg))) {
-      A[as.character(edge_agg$source[i]), as.character(edge_agg$target[i])] <- edge_agg$weight[i]
-    }
-  } else {
-    stop("choose_dataset_local: unknown dataset '", dataset, "'")
-  }
-  A <- as.matrix(A)
-  stopifnot(nrow(A) == ncol(A))
-  colnames(A) <- rownames(A)
-  A
+  load_application_adjacency(dataset)
 }
 
 # --- Find fit file: run dir first (canonical, newer), ppc as fallback ---
 find_fit_file_local <- function(dataset_name, model, ppc_dir) {
   fm <- if (model %in% c("DC-SBM", "DCSBM")) "DCSBM" else model
   # Prefer canonical run dir fit
-  run_dir <- Sys.getenv("APP_RUN_DIR",
-    unset = "./output/application/raw/application_run_20260411_163055")
+  run_dir <- bundle_resolve_application_run_dir(must_exist = FALSE)
   cand <- file.path(run_dir, paste0(dataset_name, "_", fm, "_fit.rds"))
   if (file.exists(cand)) return(cand)
   # Fallback: ppc directory (older run)
@@ -2984,7 +2931,7 @@ generate_osbm_visualizations <- function(dataset_name,
   cat("Generating visualizations for:", dataset_name, "\n")
 
   # Canonical violation stats (same formula as build_post_processing.R cube
-  # and helper_folder/transitivity_check_helper.R). Pre-computing them here
+  # and helper_folder/diagnostics/transitivity_diagnostics.R). Pre-computing them here
   # and passing the result into plot_ordered_network prevents that function
   # from re-ranking labels (which would silently produce a different
   # backward-mass than the hierarchy diagnostics).
@@ -3652,8 +3599,7 @@ run_all_osbm_visualizations <- function() {
   datasets <- datasets[!datasets %in% c(".DS_Store")]
   
   # Also pick up datasets present in the hardcoded run dir but not yet in ppc
-  run_dir <- Sys.getenv("APP_RUN_DIR",
-    unset = "./output/application/raw/application_run_20260411_163055")
+  run_dir <- bundle_resolve_application_run_dir(must_exist = FALSE)
   if (dir.exists(run_dir)) {
     run_wst_files <- list.files(run_dir, pattern = "_WST_fit\\.rds$", full.names = FALSE)
     run_datasets  <- sub("_WST_fit\\.rds$", "", run_wst_files)

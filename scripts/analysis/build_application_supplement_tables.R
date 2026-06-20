@@ -10,11 +10,9 @@ suppressPackageStartupMessages({
   library(dplyr)
   library(readr)
 })
+source("scripts/bundle_defaults.R", local = TRUE)
 
-RUN_DIR <- Sys.getenv(
-  "APP_RUN_DIR",
-  unset = "output/application/raw/application_run_20260414_104327"
-)
+RUN_DIR <- bundle_resolve_application_run_dir(must_exist = TRUE)
 if (!dir.exists(RUN_DIR)) {
   stop("APP_RUN_DIR does not exist: ", RUN_DIR, call. = FALSE)
 }

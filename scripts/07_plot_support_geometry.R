@@ -16,7 +16,7 @@
 #   5) Writes summary metrics of relative restrictiveness.
 #
 # Usage:
-#   Rscript scripts/diagnostics/simulate_support_geometries_cube.R
+#   Rscript scripts/07_plot_support_geometry.R
 #
 # Optional env vars:
 #   OUT_DIR           (default: output/diagnostics/support_geometry)
@@ -29,6 +29,15 @@
 #   N_SAMPLES         (default: 5000)
 #   OCC_THRESHOLD     (default: 0.10)
 # =============================================================================
+
+cmd <- commandArgs(trailingOnly = FALSE)
+file_arg <- cmd[grepl("^--file=", cmd)]
+if (length(file_arg)) {
+  script_path <- normalizePath(gsub("~\\+~", " ", sub("^--file=", "", file_arg[1L])),
+                               winslash = "/", mustWork = TRUE)
+  setwd(normalizePath(file.path(dirname(script_path), ".."),
+                      winslash = "/", mustWork = TRUE))
+}
 
 suppressPackageStartupMessages({
   if (!requireNamespace("plotly", quietly = TRUE)) {

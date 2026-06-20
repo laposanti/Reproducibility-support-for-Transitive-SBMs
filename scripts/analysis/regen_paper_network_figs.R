@@ -17,11 +17,9 @@ suppressPackageStartupMessages({
   source("scripts/analysis/osbm_visualization.R", chdir = FALSE)
   source("scripts/analysis/post_processing_helpers.R", chdir = FALSE)
 })
+source("scripts/bundle_defaults.R", local = TRUE)
 
-RUN_DIR <- Sys.getenv(
-  "APP_RUN_DIR",
-  unset = "output/application/raw/application_run_20260414_104327"
-)
+RUN_DIR <- bundle_resolve_application_run_dir(must_exist = TRUE)
 stopifnot(dir.exists(RUN_DIR))
 run_id <- basename(normalizePath(RUN_DIR))
 PAPER_FIG_DIR <- Sys.getenv("APP_PAPER_FIGURES_DIR", unset = "")

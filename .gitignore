@@ -1,0 +1,4 @@
+.DS_Store
+Rplots.pdf
+output/*
+!output/.gitkeep

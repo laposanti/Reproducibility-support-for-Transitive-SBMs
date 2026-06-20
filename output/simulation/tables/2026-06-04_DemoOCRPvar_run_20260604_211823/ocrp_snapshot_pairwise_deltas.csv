@@ -1,5 +1,0 @@
-Gen,$K^\star$,Density,Hierarchy,Rep,ELPD WST$-$SST (SE),Sig. WST$-$SST,ELPD WST$-$DC (SE),Sig. WST$-$DC,ELPD SST$-$DC (SE),Sig. SST$-$DC,VI WST,VI SST,VI DC,$\hat K$ W/S/DC
-SST,4,kappa_5,verystrong,1,-4.9 (1.8),\checkmark,-2.9 (2.1),,1.9 (1.3),,0.000,0.000,0.000,4/4/4
-SST,4,kappa_5,verystrong,2,-2.0 (2.2),,-3.7 (2.2),,-1.6 (2.1),,0.000,0.000,0.000,4/4/4
-WST,4,kappa_5,verystrong,1,-9.3 (4.3),\checkmark,-8.1 (4.0),\checkmark,1.2 (2.3),,0.000,0.000,0.000,4/4/4
-WST,4,kappa_5,verystrong,2,-8.9 (5.3),,-7.3 (4.0),,1.6 (3.7),,0.000,0.000,0.000,4/4/4

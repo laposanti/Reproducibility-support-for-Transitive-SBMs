@@ -1,7 +1,0 @@
-Gen,$K^\star$,Density,Hierarchy,Model,Reps,ELPD mean (SD),$\Delta$ELPD mean (SD),Sig. loss,ELPD wins,mean VI,mean $\hat K$,mean PSIS $k>0.7$
-SST,4,kappa_2,strong,WST,10,-4209.0 (392.4),-3.1 (1.5),5/10,1/10,0.149,4.10,0.010
-SST,4,kappa_2,strong,SST,10,-4208.1 (390.6),-2.2 (3.2),1/10,4/10,0.103,4.00,0.008
-SST,4,kappa_2,strong,DC-SBM,10,-4207.1 (391.4),-1.2 (1.7),0/10,5/10,0.150,4.00,0.005
-WST,4,kappa_2,strong,SST,10,-4099.9 (379.5),-8.9 (6.4),3/10,0/10,0.082,4.00,0.009
-WST,4,kappa_2,strong,WST,10,-4094.1 (376.5),-3.1 (1.5),3/10,0/10,0.064,4.00,0.004
-WST,4,kappa_2,strong,DC-SBM,10,-4091.0 (377.3),0.0 (0.0),0/10,10/10,0.064,4.00,0.001

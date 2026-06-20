@@ -1,4 +1,0 @@
-"dataset","fit_model","K_hat","K_mean","K_lo","K_hi","elpd_loo","p_loo","looic","pk_max","pk_bad","b_kappa","time_sec","note"
-"moreno_sheep","WST",6,5.53,4,7,-913.1,170.5,1826.2,4.946,0.087,1,316.1,NA
-"moreno_sheep","SST",6,5.29,4,7,-884.8,126.8,1769.6,3.627,0.037,5,442.6,NA
-"moreno_sheep","DCSBM",6,6.02,5,8,-927.9,207.3,1855.8,2.856,0.262,NA,145.2,NA
