@@ -9,14 +9,17 @@ suppressPackageStartupMessages({
   library(viridis)
   library(patchwork)
 })
+source("scripts/bundle_defaults.R", local = TRUE)
 
 # =============================================================================
 # CONFIGURATION
 # =============================================================================
 
 # Path to simulation results
-SIM_RESULTS_PATH <- Sys.getenv("SIM_RESULTS_PATH", 
-  "output/simulation/raw/full_simulation_crossfit_final_DemoKvar_run_20260302_153429.csv")
+SIM_RESULTS_PATH <- Sys.getenv(
+  "SIM_RESULTS_PATH",
+  bundle_defaults$canonical_simulation_results_csv
+)
 
 # Output directory (override with SIM_PLOTS_OUTPUT_DIR)
 OUTPUT_DIR <- Sys.getenv("SIM_PLOTS_OUTPUT_DIR", "output/simulation/plots")

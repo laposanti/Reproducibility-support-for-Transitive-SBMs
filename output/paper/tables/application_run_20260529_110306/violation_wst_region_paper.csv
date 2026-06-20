@@ -1,0 +1,19 @@
+Dataset,Model,K,Viol,DCSBMWSTPost
+Bighorn sheep,WST,4,"4.8\%\,(19/393)",
+Bighorn sheep,SST,5,"2.2\%\,(9/400)",
+Bighorn sheep,DC--SBM,5,"7.5\%\,(35/466)",27.6\%
+Spotted hyenas,WST,14,"11.4\%\,(194/1{,}703)",
+Spotted hyenas,SST,7,"10.1\%\,(131/1{,}292)",
+Spotted hyenas,DC--SBM,6,"10.4\%\,(135/1{,}299)",8.2\%
+Mountain goats,WST,4,"0.4\%\,(2/547)",
+Mountain goats,SST,6,"0.3\%\,(2/597)",
+Mountain goats,DC--SBM,4,"0.0\%\,(0/535)",100.0\%
+Stat.\ journals,WST,13,"29.6\%\,(3{,}608/12{,}188)",
+Stat.\ journals,SST,5,"33.4\%\,(3{,}056/9{,}141)",
+Stat.\ journals,DC--SBM,11,"31.5\%\,(3{,}914/12{,}416)",0.0\%
+Macaques,WST,9,"0.9\%\,(17/1{,}930)",
+Macaques,SST,10,"0.6\%\,(11/1{,}990)",
+Macaques,DC--SBM,11,"2.0\%\,(41/2{,}026)",56.1\%
+High school,WST,9,"29.4\%\,(40/136)",
+High school,SST,12,"17.5\%\,(29/166)",
+High school,DC--SBM,8,"46.1\%\,(59/128)",0.0\%

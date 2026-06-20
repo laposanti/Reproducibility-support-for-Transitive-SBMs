@@ -14,12 +14,18 @@ suppressPackageStartupMessages({
 })
 
 `%+%` <- function(a, b) paste0(a, b)
+source("scripts/bundle_defaults.R", local = TRUE)
 
 # ---------- SETTINGS -----------------------------------------
-compact_results_path <- Sys.getenv(
-  "COMPACT_RESULTS_PATH",
-  "./output/simulation/raw/full_simulation_crossfit_final_DemoKvar_run_20260302_153429.csv"
-)
+sim_results_path <- Sys.getenv("SIM_RESULTS_PATH", unset = "")
+compact_results_path <- if (nzchar(sim_results_path)) {
+  sim_results_path
+} else {
+  Sys.getenv(
+    "COMPACT_RESULTS_PATH",
+    bundle_defaults$canonical_simulation_results_csv
+  )
+}
 results_path <- Sys.getenv("RESULTS_PATH", compact_results_path)
 out_dir_main <- Sys.getenv("SIM_TABLES_OUTPUT_DIR", "output/simulation/tables")
 out_dir_appx <- file.path(out_dir_main, "appendix")
@@ -684,8 +690,9 @@ legacy_required <- c(
 )
 
 missing_legacy <- setdiff(legacy_required, names(raw))
+legacy_tables_built <- length(missing_legacy) == 0
 
-if (length(missing_legacy) == 0) {
+if (legacy_tables_built) {
   for (gen in c("WST","SST")) {
     df_gen <- raw |> filter(gen_model == gen)
 
@@ -704,8 +711,10 @@ if (length(missing_legacy) == 0) {
     make_appx_difficulty_versions(df_gen, gen)# G (skips if missing)
   }
 } else {
-  message("Skipping legacy main/appendix tables for current results file: missing columns -> ",
-          paste(missing_legacy, collapse = ", "))
+  message(
+    "Skipping deprecated WST_main/SST_main table pack for this results file; ",
+    "the current bundled CSV does not carry the older rich diagnostic columns."
+  )
 }
 
 # Compact headline summary from the current results file (or explicit override)
@@ -713,36 +722,13 @@ compact_source_path <- if (nzchar(Sys.getenv("COMPACT_RESULTS_PATH"))) compact_r
 compact_raw <- readr::read_csv(compact_source_path, show_col_types = FALSE)
 compact_headline <- make_compact_headline(compact_raw)
 
-message("\nDone. Include main tables with, e.g.:")
-message("\\input{", file.path(out_dir_main, "WST_main_table1_partition_params.tex"), "}")
-message("\\input{", file.path(out_dir_main, "WST_main_table2_psis_loo.tex"), "}")
-message("\\input{", file.path(out_dir_main, "WST_main_table3_order_block.tex"), "}")
-message("\\input{", file.path(out_dir_main, "SST_main_table1_partition_params.tex"), "}")
-message("\\input{", file.path(out_dir_main, "SST_main_table2_psis_loo.tex"), "}")
-message("\\input{", file.path(out_dir_main, "SST_main_table3_order_block.tex"), "}")
-
-message("\nAppendix suggestions:")
-message("\\input{", file.path(out_dir_appx, "WST_appx_A_vi.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_B_params.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_C_ari_winners.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_C_loo_winners.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_D_psis_detail.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_E_item_order.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_F_mcmc_quality.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_G_diff_table1.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_G_diff_table2.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "WST_appx_G_diff_table3.tex"), "}")
-
-message("\\input{", file.path(out_dir_appx, "SST_appx_A_vi.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_B_params.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_C_ari_winners.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_C_loo_winners.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_D_psis_detail.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_E_item_order.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_F_mcmc_quality.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_G_diff_table1.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_G_diff_table2.tex"), "}")
-message("\\input{", file.path(out_dir_appx, "SST_appx_G_diff_table3.tex"), "}")
-
-message("\nCompact headline table:")
-message("\\input{", file.path(out_dir_main, "sim_headline_compact.tex"), "}")
+message("\nDone.")
+if (legacy_tables_built) {
+  message("Rebuilt deprecated WST_main/SST_main table pack under: ", out_dir_main)
+  message("Rebuilt deprecated appendix table pack under: ", out_dir_appx)
+}
+message("Rebuilt compact headline table: ", file.path(out_dir_main, "sim_headline_compact.tex"))
+message(
+  "Paper-facing tab_sim_* simulation tables are rebuilt separately by ",
+  "scripts/analysis/build_simulation_crossfit_tables.R."
+)

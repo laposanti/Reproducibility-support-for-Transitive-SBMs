@@ -12,7 +12,14 @@
 #   Rscript scripts/analysis/loo_model_comparison.R [RUN_DIR]
 # If RUN_DIR is omitted, uses APP_RUN_DIR env var or finds the latest run.
 # ======================================================================
-setwd("/Users/lapo_santi/Desktop/Nial/polya-transitive-sbm/")
+cmd <- commandArgs(trailingOnly = FALSE)
+file_arg <- cmd[grepl("^--file=", cmd)]
+if (length(file_arg)) {
+  script_path <- normalizePath(sub("^--file=", "", file_arg[1L]),
+                               winslash = "/", mustWork = TRUE)
+  setwd(normalizePath(file.path(dirname(script_path), "../.."),
+                      winslash = "/", mustWork = TRUE))
+}
 
 suppressPackageStartupMessages({
   library(loo)

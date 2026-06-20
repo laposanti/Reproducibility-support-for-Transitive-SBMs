@@ -6,7 +6,14 @@
 # For the overlapping datasets, keep the same defaults as application.R so
 # the model comparisons are directly comparable.
 # ======================================================================
-setwd("/Users/lapo_santi/Desktop/Nial/polya-transitive-sbm/")
+cmd <- commandArgs(trailingOnly = FALSE)
+file_arg <- cmd[grepl("^--file=", cmd)]
+if (length(file_arg)) {
+  script_path <- normalizePath(sub("^--file=", "", file_arg[1L]),
+                               winslash = "/", mustWork = TRUE)
+  setwd(normalizePath(file.path(dirname(script_path), "../.."),
+                      winslash = "/", mustWork = TRUE))
+}
 
 
 run_start_time <- Sys.time()

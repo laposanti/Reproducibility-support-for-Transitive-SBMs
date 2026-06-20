@@ -1,0 +1,5 @@
+run_id: application_run_20260529_110306
+run_dir: /Users/lapo_santi/Desktop/Nial/polya-transitive-sbm/tex file/Ordered Stochastic Block Model/output/application/raw/application_run_20260529_110306
+generated_by: scripts/analysis/build_paper_loo_table.R
+generated_at: 2026-06-19 16:28:50 IST
+R_version: R version 4.5.2 (2025-10-31)
