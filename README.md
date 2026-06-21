@@ -11,23 +11,25 @@ The repository now contains only:
 - the public scripts needed to regenerate simulations, application fits, tables, and figures
 - a small preview set for this README
 
-No cached raw runs are bundled. The only committed rendered assets are the four preview images in `docs/previews/`. All real results are regenerated locally under `output/`, which is ignored by Git.
+No cached raw runs are bundled. The only committed rendered assets are the README preview images in `docs/previews/`. All real results are regenerated locally under `output/`, which is ignored by Git.
 
 ## At a glance
 
 | Result in the PDF | Paper section | Preview / description | Generated file(s) | Script entry point(s) | Key builder function(s) |
 | --- | --- | --- | --- | --- | --- |
-| Figure 2 | Main text: support geometry | <img src="docs/previews/support_geometry.png" width="220" alt="Support geometry"> | `output/diagnostics/support_geometry/support_3d_shaded_geometry.png` | [`scripts/07_plot_support_geometry.R`](scripts/07_plot_support_geometry.R) | [`save_static_3d_shaded_geometry()`](scripts/07_plot_support_geometry.R) |
+| Figure 2 | Main text: support geometry | <img src="docs/previews/support_3d_shaded_geometry.png" width="220" alt="Support geometry"> | `output/diagnostics/support_geometry/support_3d_shaded_geometry.png` | [`scripts/07_plot_support_geometry.R`](scripts/07_plot_support_geometry.R) | [`save_static_3d_shaded_geometry()`](scripts/07_plot_support_geometry.R) |
 | Table 1 | Main text: simulation study | Sparse weak and dense strong scenarios with `K_hat`, exact-`K` recovery, and `ARI`. | `output/simulation/tables/tab_sim_partition_main.tex` | [`scripts/02_run_main_simulation_study.R`](scripts/02_run_main_simulation_study.R)<br>[`scripts/06_build_simulation_tables_and_figures.R`](scripts/06_build_simulation_tables_and_figures.R) | [`build_main_simulation_partition_table()`](scripts/analysis/build_simulation_crossfit_tables.R) |
 | Table 2 | Main text: simulation study | Compact predictive comparison for the same scenarios as Table 1. | `output/simulation/tables/tab_sim_elpd_main.tex` | [`scripts/02_run_main_simulation_study.R`](scripts/02_run_main_simulation_study.R)<br>[`scripts/06_build_simulation_tables_and_figures.R`](scripts/06_build_simulation_tables_and_figures.R) | [`build_main_simulation_elpd_table()`](scripts/analysis/build_simulation_crossfit_tables.R) |
-| Figure 4 | Main text: simulation study | <img src="docs/previews/simulation_vi.png" width="220" alt="Simulation VI"> | `output/simulation/plots/vi_boxplot_WST_gen.{pdf,png}`<br>`output/simulation/plots/vi_boxplot_SST_gen.{pdf,png}` | [`scripts/06_build_simulation_tables_and_figures.R`](scripts/06_build_simulation_tables_and_figures.R) | [`plot_metric_grid_hierch()`](scripts/analysis/sim_visualization.R) |
+| Figure 4 | Main text: simulation study | <img src="docs/previews/vi_boxplot_WST_gen.png" width="108" alt="Figure 4 WST-generated VI panel"> <img src="docs/previews/vi_boxplot_SST_gen.png" width="108" alt="Figure 4 SST-generated VI panel"> | `output/simulation/plots/vi_boxplot_WST_gen.{pdf,png}`<br>`output/simulation/plots/vi_boxplot_SST_gen.{pdf,png}` | [`scripts/06_build_simulation_tables_and_figures.R`](scripts/06_build_simulation_tables_and_figures.R) | [`plot_metric_grid_hierch()`](scripts/analysis/sim_visualization.R) |
 | Table 3 | Main text: application datasets | The six bundled directed weighted networks used in the application study. | `data/moreno_sheep/edges.csv`<br>`data/Strauss_2019b/edges.csv`<br>`data/mountain_goats/adjacency_matrix.csv`<br>`data/citations_data/adjacency_matrix.csv`<br>`data/macaques_data/edge_list.tsv`<br>`data/high_school/edges.csv` | Bundled data; no build step | [`paper_application_data_paths()`](helper_folder/io/application_data_loader.R)<br>[`load_application_adjacency()`](helper_folder/io/application_data_loader.R) |
+| Figure 5 | Main text: application study | <img src="docs/previews/moreno_sheep_SST_network_tier_line.png" width="108" alt="Figure 5 SST sheep partition"> <img src="docs/previews/moreno_sheep_DCSBM_network_tier_line.png" width="108" alt="Figure 5 DC-SBM sheep partition"> | `output/paper/figures/<run_id>/moreno_sheep_SST_network_tier_line.png`<br>`output/paper/figures/<run_id>/moreno_sheep_DCSBM_network_tier_line.png` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/03_build_application_postprocessing_cube.R`](scripts/03_build_application_postprocessing_cube.R)<br>[`scripts/05_plot_paper_application_figures.R`](scripts/05_plot_paper_application_figures.R) | [`plot_ordered_network()`](scripts/analysis/osbm_visualization.R) |
 | Table 4 | Main text: application study | Winners by dataset across WST, SST, and DC-SBM. | `output/paper/tables/<run_id>/model_selection_paper.tex` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/03_build_application_postprocessing_cube.R`](scripts/03_build_application_postprocessing_cube.R)<br>[`scripts/04_build_paper_tables.R`](scripts/04_build_paper_tables.R) | [`write_model_selection_paper_outputs()`](scripts/analysis/build_paper_loo_table.R) |
-| Figure 5 | Main text: application study | <img src="docs/previews/application_network.png" width="220" alt="Application network"> | `output/paper/figures/<run_id>/moreno_sheep_SST_network_tier_line.png`<br>`output/paper/figures/<run_id>/moreno_sheep_DCSBM_network_tier_line.png` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/03_build_application_postprocessing_cube.R`](scripts/03_build_application_postprocessing_cube.R)<br>[`scripts/05_plot_paper_application_figures.R`](scripts/05_plot_paper_application_figures.R) | [`plot_ordered_network_stress()`](scripts/analysis/osbm_visualization.R)<br>[`plot_simple_network_layout()`](scripts/analysis/regen_paper_network_figs.R) |
-| Figure 6 | Main text: application study | Spotted-hyena empirical forward-share structure. | `output/paper/figures/<run_id>/strauss_2019b_combined_block_networks_clean.{pdf,png}` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/03_build_application_postprocessing_cube.R`](scripts/03_build_application_postprocessing_cube.R)<br>[`scripts/05_plot_paper_application_figures.R`](scripts/05_plot_paper_application_figures.R) | [`plot_combined_block_networks_clean()`](scripts/analysis/osbm_visualization.R) |
-| Figure 7 | Main text: application study | High-school empirical forward-share structure. | `output/paper/figures/<run_id>/high_school_combined_block_networks_clean.{pdf,png}` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/03_build_application_postprocessing_cube.R`](scripts/03_build_application_postprocessing_cube.R)<br>[`scripts/05_plot_paper_application_figures.R`](scripts/05_plot_paper_application_figures.R) | [`plot_combined_block_networks_clean()`](scripts/analysis/osbm_visualization.R) |
-| Table 9 | Supplement: application diagnostics | Cycle-diagnostic summary across the application datasets. | `output/paper/tables/<run_id>/application_cycle_diagnostics.tex` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/04_build_paper_tables.R`](scripts/04_build_paper_tables.R) | [`build_cycle_table()`](scripts/analysis/build_application_supplement_tables.R) |
-| Bradley-Terry delta plot | Application WST additivity diagnostic | <img src="docs/previews/bt_delta.png" width="220" alt="Bradley-Terry delta"> | `output/paper/figures/<run_id>/bt_delta_wst_applications.{pdf,png}` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/09_build_bradley_terry_delta_plot.R`](scripts/09_build_bradley_terry_delta_plot.R) | [`compute_delta_summary()`](scripts/analysis/build_bt_delta_summary.R)<br>[`make_plot()`](scripts/analysis/build_bt_delta_summary.R) |
+| Figure 6 | Main text: application study | <img src="docs/previews/strauss_2019b_combined_block_networks_clean.png" width="220" alt="Figure 6 hyena forward-share blocks"> | `output/paper/figures/<run_id>/strauss_2019b_combined_block_networks_clean.{pdf,png}` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/03_build_application_postprocessing_cube.R`](scripts/03_build_application_postprocessing_cube.R)<br>[`scripts/05_plot_paper_application_figures.R`](scripts/05_plot_paper_application_figures.R) | [`plot_combined_block_networks_clean()`](scripts/analysis/osbm_visualization.R) |
+| Figure 7 | Main text: application study | <img src="docs/previews/high_school_combined_block_networks_clean.png" width="220" alt="Figure 7 high-school forward-share blocks"> | `output/paper/figures/<run_id>/high_school_combined_block_networks_clean.{pdf,png}` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/03_build_application_postprocessing_cube.R`](scripts/03_build_application_postprocessing_cube.R)<br>[`scripts/05_plot_paper_application_figures.R`](scripts/05_plot_paper_application_figures.R) | [`plot_combined_block_networks_clean()`](scripts/analysis/osbm_visualization.R) |
+| Supplement Figure 1 | Supplement: simulation study | <img src="docs/previews/vi_boxplot_SST_gen.png" width="220" alt="Supplement Figure 1 SST-generated VI"> | `output/simulation/plots/vi_boxplot_SST_gen.{pdf,png}` | [`scripts/06_build_simulation_tables_and_figures.R`](scripts/06_build_simulation_tables_and_figures.R) | [`plot_metric_grid_hierch()`](scripts/analysis/sim_visualization.R) |
+| Supplement Figure 2 | Supplement: simulation study | <img src="docs/previews/ari_boxplot_combined.png" width="220" alt="Supplement Figure 2 combined ARI"> | `output/simulation/plots/ari_boxplot_combined.{pdf,png}` | [`scripts/06_build_simulation_tables_and_figures.R`](scripts/06_build_simulation_tables_and_figures.R) | [`plot_metric_grid_hierch()`](scripts/analysis/sim_visualization.R) |
+| Supplement Figure 3 | Supplement: OCRP prior diagnostics | <img src="docs/previews/age_ordered_prior_theta_sensitivity.png" width="220" alt="Supplement Figure 3 age-ordered prior sensitivity"> | `output/diagnostics/age_ordered_prior/age_ordered_prior_theta_sensitivity.{pdf,png}` | [`scripts/08_plot_age_ordered_prior_sensitivity.R`](scripts/08_plot_age_ordered_prior_sensitivity.R) | [`save_age_ordered_prior_sensitivity()`](scripts/analysis/build_age_ordered_prior_sensitivity.R) |
+| Supplement Table 5 | Supplement: application diagnostics | Cycle-diagnostic summary across the application datasets. | `output/paper/tables/<run_id>/application_cycle_diagnostics.tex` | [`scripts/01_run_application_mcmc.R`](scripts/01_run_application_mcmc.R)<br>[`scripts/04_build_paper_tables.R`](scripts/04_build_paper_tables.R) | [`build_cycle_table()`](scripts/analysis/build_application_supplement_tables.R) |
 
 The script links above point to the public entry points. The function links point to the file that contains the named builder or plotting function used for that artifact.
 
@@ -63,6 +65,7 @@ scripts/
   05_plot_paper_application_figures.R
   06_build_simulation_tables_and_figures.R
   07_plot_support_geometry.R
+  08_plot_age_ordered_prior_sensitivity.R
   09_build_bradley_terry_delta_plot.R
 ```
 
@@ -93,6 +96,7 @@ Rscript scripts/03_build_application_postprocessing_cube.R
 Rscript scripts/04_build_paper_tables.R
 Rscript scripts/05_plot_paper_application_figures.R
 Rscript scripts/07_plot_support_geometry.R
+Rscript scripts/08_plot_age_ordered_prior_sensitivity.R
 Rscript scripts/09_build_bradley_terry_delta_plot.R
 ```
 
@@ -181,6 +185,12 @@ Rscript scripts/06_build_simulation_tables_and_figures.R
 Rscript scripts/07_plot_support_geometry.R
 ```
 
+### 4. Supplement Prior-Sensitivity Figure
+
+```sh
+Rscript scripts/08_plot_age_ordered_prior_sensitivity.R
+```
+
 ## Outputs
 
 Generated files are written under `output/`:
@@ -193,6 +203,7 @@ Generated files are written under `output/`:
 - `output/simulation/tables/`
 - `output/simulation/plots/`
 - `output/diagnostics/support_geometry/`
+- `output/diagnostics/age_ordered_prior/`
 
 These outputs are not committed. A fresh clone of the repository should have an effectively empty `output/` directory except for `.gitkeep`.
 
@@ -210,6 +221,7 @@ Rscript scripts/03_build_application_postprocessing_cube.R
 Rscript scripts/04_build_paper_tables.R
 Rscript scripts/05_plot_paper_application_figures.R
 Rscript scripts/07_plot_support_geometry.R
+Rscript scripts/08_plot_age_ordered_prior_sensitivity.R
 Rscript scripts/09_build_bradley_terry_delta_plot.R
 ```
 
