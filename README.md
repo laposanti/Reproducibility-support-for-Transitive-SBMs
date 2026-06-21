@@ -2,18 +2,13 @@
 
 Standalone reproduction bundle for the manuscript *Ordering Stochastic Block Models via prior transitivity*.
 
-This is the cleaned paper-facing reproduction bundle for the ordered SBM project. Only the samplers, helper code, public scripts, six application datasets, and README preview assets needed for the paper-facing workflow remain.
+The repository contains:
 
-The repository now contains only:
+- the MCMC samplers and helper code needed to reproduce the results of the paper;
+- the six application datasets used in the paper;
+- the scripts needed to regenerate simulations, application fits, tables, and figures
 
-- the samplers and helper code needed for the paper-facing workflow
-- the six application datasets used in the paper
-- the public scripts needed to regenerate simulations, application fits, tables, and figures
-- a small preview set for this README
-
-No cached raw runs are bundled. The only committed rendered assets are the README preview images in `docs/previews/`. All real results are regenerated locally under `output/`, which is ignored by Git.
-
-## At a glance
+## Results presented in the paper and links to the key functions to reproduce them
 
 | Result in the PDF | Paper section | Preview / description | Generated file(s) | Script entry point(s) | Key builder function(s) |
 | --- | --- | --- | --- | --- | --- |
@@ -77,32 +72,7 @@ Install the required R packages:
 Rscript scripts/install_required_packages.R
 ```
 
-## Quick Validation
-
-Run the two lightweight checks first:
-
-```sh
-Rscript scripts/testing/test_hierarchy_metrics.R
-Rscript scripts/testing/quick_smoke_test.R
-```
-
-Then use the fast smoke paths to confirm that the cleaned repository runs from a blank `output/` tree:
-
-```sh
-DEMOKVAR_SMOKE=1 Rscript scripts/02_run_main_simulation_study.R
-Rscript scripts/06_build_simulation_tables_and_figures.R
-env APP_DATASETS=moreno_sheep APP_N_ITER=800 APP_BURN=200 APP_THIN=2 APP_SEED=1 Rscript scripts/01_run_application_mcmc.R
-Rscript scripts/03_build_application_postprocessing_cube.R
-Rscript scripts/04_build_paper_tables.R
-Rscript scripts/05_plot_paper_application_figures.R
-Rscript scripts/07_plot_support_geometry.R
-Rscript scripts/08_plot_age_ordered_prior_sensitivity.R
-Rscript scripts/09_build_bradley_terry_delta_plot.R
-```
-
-The `moreno_sheep` application smoke run is only a validation shortcut. For the full paper-facing application rebuild, run `scripts/01_run_application_mcmc.R` with its default six-dataset configuration.
-
-## Public Workflow
+## Full-reproducibility workflow
 
 ### 1. Application Study
 
