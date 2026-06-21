@@ -198,85 +198,96 @@ fmt_K    <- function(hat, lo, hi) {
           fmt_num(hi, 0))
 }
 
-# ---- 6. Build LaTeX rows ---------------------------------------------------
-tex_lines <- character()
-push <- function(x) tex_lines[[length(tex_lines) + 1L]] <<- x
+write_model_selection_paper_outputs <- function(res, dataset_order, dataset_label,
+                                                out_dir, run_id, run_dir) {
+  tex_lines <- character()
+  push <- function(x) tex_lines[[length(tex_lines) + 1L]] <<- x
 
-push("\\begin{tabular}{llcrrrr}")
-push("\\toprule")
-push(paste0(
-  "Dataset & Model & $\\hat K\\;[95\\%\\text{ CrI}]$ & LOOIC & ",
-  "$\\Delta\\text{ELPD}$ & SE($\\Delta\\text{ELPD}$) & $|t_{\\mathrm{LOO}}|$ \\\\"
-))
-push("\\midrule")
+  push("\\begin{tabular}{llcrrrr}")
+  push("\\toprule")
+  push(paste0(
+    "Dataset & Model & $\\hat K\\;[95\\%\\text{ CrI}]$ & LOOIC & ",
+    "$\\Delta\\text{ELPD}$ & SE($\\Delta\\text{ELPD}$) & $|t_{\\mathrm{LOO}}|$ \\\\"
+  ))
+  push("\\midrule")
 
-n_ds <- length(dataset_order)
-for (k in seq_along(dataset_order)) {
-  ds <- dataset_order[[k]]
-  rows <- res %>% filter(dataset == ds) %>% arrange(rank)
-  ds_lab <- dataset_label[[ds]]
+  n_ds <- length(dataset_order)
+  for (k in seq_along(dataset_order)) {
+    ds <- dataset_order[[k]]
+    rows <- res %>% filter(dataset == ds) %>% arrange(rank)
+    if (!nrow(rows)) next
+    ds_lab <- dataset_label[[ds]]
 
-  for (i in seq_len(nrow(rows))) {
-    r <- rows[i, ]
-    ds_cell <- if (i == 1L) sprintf("\\multirow{%d}{*}{%s}", nrow(rows), ds_lab) else ""
+    for (i in seq_len(nrow(rows))) {
+      r <- rows[i, ]
+      ds_cell <- if (i == 1L) sprintf("\\multirow{%d}{*}{%s}", nrow(rows), ds_lab) else ""
 
-    model_cell <- if (i == 1L) sprintf("\\textbf{%s}", r$model_disp) else r$model_disp
-    K_cell     <- fmt_K(r$K_hat, r$K_lo, r$K_hi)
-    looic_cell <- if (i == 1L) sprintf("$\\mathbf{%s}$", fmt_num(r$looic, 1))
-                  else                  sprintf("$%s$",         fmt_num(r$looic, 1))
+      model_cell <- if (i == 1L) sprintf("\\textbf{%s}", r$model_disp) else r$model_disp
+      K_cell     <- fmt_K(r$K_hat, r$K_lo, r$K_hi)
+      looic_cell <- if (i == 1L) sprintf("$\\mathbf{%s}$", fmt_num(r$looic, 1))
+                    else                  sprintf("$%s$",         fmt_num(r$looic, 1))
 
-    if (i == 1L) {
-      delta_cell <- "$0$"
-      se_cell    <- "---"
-      z_cell     <- "---"
-    } else {
-      delta_cell <- sprintf("$%s$", fmt_num(r$delta_elpd_eff, 1))
-      se_cell    <- sprintf("$%s$", fmt_num(r$se_eff, 1))
-      z_val      <- fmt_num(r$z_eff, 2)
-      z_cell     <- if (isTRUE(r$clear_95)) {
-        sprintf("$\\mathbf{%s}^{\\dagger}$", z_val)
+      if (i == 1L) {
+        delta_cell <- "$0$"
+        se_cell    <- "---"
+        z_cell     <- "---"
       } else {
-        sprintf("$%s$", z_val)
+        delta_cell <- sprintf("$%s$", fmt_num(r$delta_elpd_eff, 1))
+        se_cell    <- sprintf("$%s$", fmt_num(r$se_eff, 1))
+        z_val      <- fmt_num(r$z_eff, 2)
+        z_cell     <- if (isTRUE(r$clear_95)) {
+          sprintf("$\\mathbf{%s}^{\\dagger}$", z_val)
+        } else {
+          sprintf("$%s$", z_val)
+        }
       }
+
+      push(sprintf("%s & %s & %s & %s & %s & %s & %s \\\\",
+                   ds_cell, model_cell, K_cell, looic_cell,
+                   delta_cell, se_cell, z_cell))
     }
-
-    push(sprintf("%s & %s & %s & %s & %s & %s & %s \\\\",
-                 ds_cell, model_cell, K_cell, looic_cell,
-                 delta_cell, se_cell, z_cell))
+    if (k < n_ds) push("\\addlinespace")
   }
-  if (k < n_ds) push("\\addlinespace")
+  push("\\bottomrule")
+  push("\\end{tabular}")
+
+  tex_path <- file.path(out_dir, "model_selection_paper.tex")
+  writeLines(tex_lines, tex_path)
+  cat("Wrote:", tex_path, "\n")
+
+  csv_out <- res %>%
+    select(dataset, model = model_disp, rank,
+           K_hat, K_lo, K_hi, elpd_loo, looic,
+           delta_elpd = delta_elpd_eff,
+           se_delta_elpd = se_eff,
+           z_ratio = z_eff,
+           t_ratio = z_eff,
+           n_obs = n_obs_eff,
+           loo_df,
+           t_crit_95,
+           clear_95)
+
+  csv_path <- file.path(out_dir, "model_selection_paper.csv")
+  readr::write_csv(csv_out, csv_path)
+  cat("Wrote:", csv_path, "\n")
+
+  manifest_path <- file.path(out_dir, "MANIFEST.txt")
+  writeLines(c(
+    paste0("run_id: ", run_id),
+    paste0("run_dir: ", normalizePath(run_dir)),
+    paste0("generated_by: scripts/analysis/build_paper_loo_table.R"),
+    paste0("generated_at: ", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z")),
+    paste0("R_version: ", R.version.string)
+  ), manifest_path)
+  cat("Wrote:", manifest_path, "\n")
 }
-push("\\bottomrule")
-push("\\end{tabular}")
 
-tex_path <- file.path(OUT_DIR, "model_selection_paper.tex")
-writeLines(tex_lines, tex_path)
-cat("Wrote:", tex_path, "\n")
-
-# ---- 7. Tidy CSV companion -------------------------------------------------
-csv_out <- res %>%
-  select(dataset, model = model_disp, rank,
-         K_hat, K_lo, K_hi, elpd_loo, looic,
-         delta_elpd = delta_elpd_eff,
-         se_delta_elpd = se_eff,
-         z_ratio = z_eff,
-         t_ratio = z_eff,
-         n_obs = n_obs_eff,
-         loo_df,
-         t_crit_95,
-         clear_95)
-
-csv_path <- file.path(OUT_DIR, "model_selection_paper.csv")
-readr::write_csv(csv_out, csv_path)
-cat("Wrote:", csv_path, "\n")
-
-# ---- 8. Provenance manifest -----------------------------------------------
-manifest_path <- file.path(OUT_DIR, "MANIFEST.txt")
-writeLines(c(
-  paste0("run_id: ", run_id),
-  paste0("run_dir: ", normalizePath(RUN_DIR)),
-  paste0("generated_by: scripts/analysis/build_paper_loo_table.R"),
-  paste0("generated_at: ", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z")),
-  paste0("R_version: ", R.version.string)
-), manifest_path)
-cat("Wrote:", manifest_path, "\n")
+# ---- 6. Write outputs ------------------------------------------------------
+write_model_selection_paper_outputs(
+  res = res,
+  dataset_order = dataset_order,
+  dataset_label = dataset_label,
+  out_dir = OUT_DIR,
+  run_id = run_id,
+  run_dir = RUN_DIR
+)

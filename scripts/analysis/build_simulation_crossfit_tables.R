@@ -528,58 +528,93 @@ if (nrow(sst_ari_rows) > 0L) {
 ##    Only lowest and highest kappa_mean are kept.
 ## -------------------------------------------------------------------
 
+build_main_simulation_partition_table <- function(summary_perf, kappa_keep) {
+  tab_partition <- summary_perf %>%
+    filter(kappa_mean %in% kappa_keep) %>%
+    arrange(gen_model, hierch, K_true, kappa_mean, fit_model) %>%
+    transmute(
+      `Generative` = gen_model,
+      `Hierarchy`  = hierch,
+      `K^*`        = K_true,
+      `kappa_mean` = kappa_mean,
+      `Model`      = fit_model,
+      `E[K_hat] (sd)`        = K_hat_str,
+      `Pr(K_hat = K^*)`      = propK_str,
+      `ARI (mean sd)`        = ARI_str
+    )
+
+  kbl(
+    tab_partition,
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Partition recovery and K recovery by generative model, hierarchy, true K, density (kappa_mean) and fitted model (only lowest and highest densities)."
+  ) %>%
+    kable_styling(full_width = FALSE, position = "center")
+}
+
+build_main_simulation_elpd_table <- function(summary_perf, kappa_keep) {
+  tab_elpd <- summary_perf %>%
+    filter(kappa_mean %in% kappa_keep) %>%
+    arrange(gen_model, hierch, K_true, kappa_mean, fit_model) %>%
+    transmute(
+      `Generative` = gen_model,
+      `Hierarchy`  = hierch,
+      `K^*`        = K_true,
+      `kappa_mean` = kappa_mean,
+      `Model`      = fit_model,
+      `ELPD (mean sd)` = ELPD_str,
+      `ΔELPD`          = dELPD_str,
+      `Pr(best ELPD)`  = propBest_str
+    )
+
+  kbl(
+    tab_elpd,
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Predictive performance: ELPD, ΔELPD and probability of having the best ELPD by generative model, hierarchy, true K, density and fitted model (only lowest and highest densities)."
+  ) %>%
+    kable_styling(full_width = FALSE, position = "center")
+}
+
+build_main_simulation_order_table <- function(summary_order, kappa_keep_order) {
+  tab_order <- summary_order %>%
+    filter(kappa_mean %in% kappa_keep_order) %>%
+    arrange(gen_model, hierch, K_true, kappa_mean, fit_model) %>%
+    transmute(
+      `Generative` = gen_model,
+      `Hierarchy`  = hierch,
+      `K^*`        = K_true,
+      `kappa_mean` = kappa_mean,
+      `Model`      = fit_model,
+      `$\\widehat{\\zeta}_W^{blk}$` = zetaW_blk_str,
+      `$\\widehat{\\zeta}_S^{blk}$` = zetaS_blk_str,
+      `$\\zeta^{viol}_{\\hat z}$`   = zeta_viol_str
+    )
+
+  kbl(
+    tab_order,
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Empirical block-level WST/SST conformity and violation rate by generative model, hierarchy, true K, density and fitted model (only lowest and highest densities)."
+  ) %>%
+    kable_styling(full_width = FALSE, position = "center")
+}
+
 # pick only the lowest and highest kappa
 kappa_vals <- sort(unique(summary_perf$kappa_mean))
 kappa_keep <- c(min(kappa_vals), max(kappa_vals))
 
 ## --------------------------- 4.1 Partition / K recovery -------------
-tab_partition <- summary_perf %>%
-  filter(kappa_mean %in% kappa_keep) %>%
-  arrange(gen_model, hierch, K_true, kappa_mean, fit_model) %>%
-  transmute(
-    `Generative` = gen_model,
-    `Hierarchy`  = hierch,
-    `K^*`        = K_true,
-    `kappa_mean` = kappa_mean,
-    `Model`      = fit_model,
-    `E[K_hat] (sd)`        = K_hat_str,
-    `Pr(K_hat = K^*)`      = propK_str,
-    `ARI (mean sd)`        = ARI_str
-  )
-
-tab_partition_kbl <-
-  kbl(tab_partition,
-      format   = "latex",
-      booktabs = TRUE,
-      escape   = FALSE,
-      caption  = "Partition recovery and K recovery by generative model, hierarchy, true K, density (kappa_mean) and fitted model (only lowest and highest densities).") %>%
-  kable_styling(full_width = FALSE, position = "center")
+tab_partition_kbl <- build_main_simulation_partition_table(summary_perf, kappa_keep)
 
 save_kable(tab_partition_kbl,
            "./output/simulation/tables/tab_sim_partition_main.tex")
 
 ## --------------------------- 4.2 ELPD / model choice ----------------
-tab_elpd <- summary_perf %>%
-  filter(kappa_mean %in% kappa_keep) %>%
-  arrange(gen_model, hierch, K_true, kappa_mean, fit_model) %>%
-  transmute(
-    `Generative` = gen_model,
-    `Hierarchy`  = hierch,
-    `K^*`        = K_true,
-    `kappa_mean` = kappa_mean,
-    `Model`      = fit_model,
-    `ELPD (mean sd)` = ELPD_str,
-    `ΔELPD`          = dELPD_str,
-    `Pr(best ELPD)`  = propBest_str
-  )
-
-tab_elpd_kbl <-
-  kbl(tab_elpd,
-      format   = "latex",
-      booktabs = TRUE,
-      escape   = FALSE,
-      caption  = "Predictive performance: ELPD, ΔELPD and probability of having the best ELPD by generative model, hierarchy, true K, density and fitted model (only lowest and highest densities).") %>%
-  kable_styling(full_width = FALSE, position = "center")
+tab_elpd_kbl <- build_main_simulation_elpd_table(summary_perf, kappa_keep)
 
 save_kable(tab_elpd_kbl,
            "./output/simulation/tables/tab_sim_elpd_main.tex")
@@ -589,27 +624,7 @@ save_kable(tab_elpd_kbl,
 kappa_vals_order <- sort(unique(summary_order$kappa_mean))
 kappa_keep_order <- c(min(kappa_vals_order), max(kappa_vals_order))
 
-tab_order <- summary_order %>%
-  filter(kappa_mean %in% kappa_keep_order) %>%
-  arrange(gen_model, hierch, K_true, kappa_mean, fit_model) %>%
-  transmute(
-    `Generative` = gen_model,
-    `Hierarchy`  = hierch,
-    `K^*`        = K_true,
-    `kappa_mean` = kappa_mean,
-    `Model`      = fit_model,
-    `$\\widehat{\\zeta}_W^{blk}$` = zetaW_blk_str,
-    `$\\widehat{\\zeta}_S^{blk}$` = zetaS_blk_str,
-    `$\\zeta^{viol}_{\\hat z}$`   = zeta_viol_str
-  )
-
-tab_order_kbl <-
-  kbl(tab_order,
-      format   = "latex",
-      booktabs = TRUE,
-      escape   = FALSE,
-      caption  = "Empirical block-level WST/SST conformity and violation rate by generative model, hierarchy, true K, density and fitted model (only lowest and highest densities).") %>%
-  kable_styling(full_width = FALSE, position = "center")
+tab_order_kbl <- build_main_simulation_order_table(summary_order, kappa_keep_order)
 
 save_kable(tab_order_kbl,
            "./output/simulation/tables/tab_sim_order_main.tex")
