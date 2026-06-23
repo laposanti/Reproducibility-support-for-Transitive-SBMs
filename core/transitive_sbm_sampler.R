@@ -30,8 +30,8 @@ modular_osbm_sampler <- function(
     sample_b_kappa = FALSE,
     alpha0_bkappa  = 1.0,    # hyperprior shape: b_kappa ~ Gamma(alpha0, beta0)
     beta0_bkappa   = 0.01,   # hyperprior rate:  prior mean = alpha0 / beta0 = 100
-    # Mixing moves: set FALSE to disable swap/split-merge MH moves
-    use_mixing_moves = TRUE,
+    # Mixing moves: set FALSE to reproduce the results in the original paper (no mixing moves)
+    use_mixing_moves = FALSE,
     # DEBUG: dump sampler state to disk on NaN / invariant failure
     debug_dump_dir = NULL
 ){
