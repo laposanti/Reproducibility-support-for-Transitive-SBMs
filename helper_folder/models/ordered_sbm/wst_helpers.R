@@ -182,7 +182,6 @@ wst_update_i_with_birth_LOO_pg <- function(
     r_set = NULL,
     slot_radius = NULL,
     partition_prior = "OCRP",
-    alpha_gp05 = 0.5,
     theta_ocrp = 1.0
 ) {
   K_full <- nrow(kappa)
@@ -293,7 +292,6 @@ wst_update_i_with_birth_LOO_pg <- function(
   } else {
     toupper(trimws(partition_prior))
   }
-  use_gp05 <- identical(prior_type, "GP05")
   use_ocrp <- identical(prior_type, "OCRP")
   use_rocrp <- identical(prior_type, "ROCRP")
 
@@ -301,15 +299,11 @@ wst_update_i_with_birth_LOO_pg <- function(
     pw <- ocrp_log_weights_packed(v_minus, theta_ocrp = theta_ocrp)
   } else if (use_rocrp) {
     pw <- rocrp_log_weights_packed(v_minus, theta_ocrp = theta_ocrp)
-  } else if (use_gp05) {
-    pw <- gp05_log_weights_packed(v_minus,
-                                   alpha_gp05 = alpha_gp05,
-                                   gamma_gp05 = gamma_gn)
   } else {
     pw <- gn_log_weights_packed(v_minus, gamma_gn = gamma_gn)
   }
   lp_prior_exist <- pw$exist
-  lp_prior_new   <- pw$new    # scalar for GN, vector(H+1) for GP05
+  lp_prior_new   <- pw$new
   per_slot <- isTRUE(pw$per_slot)
 
   total_exist <- lp_dir_exist + lp_kappa_exist + lp_prior_exist

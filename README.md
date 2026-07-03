@@ -6,7 +6,28 @@ The repository contains:
 
 - the MCMC samplers and helper code needed to reproduce the results of the paper;
 - the six application datasets used in the paper;
-- the scripts needed to regenerate simulations, application fits, tables, and figures
+- the scripts needed to regenerate simulations, application fits, tables, and figures;
+- lightweight preview images used only to identify the paper artifacts in this README.
+
+Generated analysis outputs are not part of the source bundle. They are written
+under `output/` when the scripts are run and can be deleted safely between runs.
+The top-level numbered scripts in `scripts/` are the public entry points; files
+under `scripts/analysis/`, `scripts/application/`, `scripts/simulation/`,
+`helper_folder/`, and `core/` are implementation code used by those entry
+points.
+
+## Reproduction bundle size
+
+For upload, archive the source bundle without local git history or generated
+outputs:
+
+```sh
+zip -r ../transitive_sbm_reproducibility.zip . \
+  -x ".git/*" "output/*" "*.zip" ".DS_Store" "*/.DS_Store"
+```
+
+This keeps the archive focused on reproducible source code, data, and README
+previews. The checked bundle is expected to stay below 20 MB after compression.
 
 ## Results presented in the paper and links to the key functions to reproduce them
 
@@ -175,3 +196,5 @@ Generated files are written under `output/`:
 - `output/diagnostics/support_geometry/`
 - `output/diagnostics/age_ordered_prior/`
 
+The repository keeps only `output/.gitkeep` so the directory exists in a fresh
+checkout. All other files under `output/` are regenerated artifacts.

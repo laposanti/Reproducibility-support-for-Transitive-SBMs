@@ -384,7 +384,6 @@ sst_update_i_with_birth_LOO_pg <- function(
     mu0 = 0,
     sig2_0 = 1,
     partition_prior = "OCRP",
-    alpha_gp05 = 0.5,
     theta_ocrp = 1.0,
     birth_score_mode = c("exact_nonlocal", "local_approx")
 ) {
@@ -520,7 +519,6 @@ sst_update_i_with_birth_LOO_pg <- function(
   } else {
     toupper(trimws(partition_prior))
   }
-  use_gp05 <- identical(prior_type, "GP05")
   use_ocrp <- identical(prior_type, "OCRP")
   use_rocrp <- identical(prior_type, "ROCRP")
 
@@ -528,10 +526,6 @@ sst_update_i_with_birth_LOO_pg <- function(
     pw <- ocrp_log_weights_packed(v_minus, theta_ocrp = theta_ocrp)
   } else if (use_rocrp) {
     pw <- rocrp_log_weights_packed(v_minus, theta_ocrp = theta_ocrp)
-  } else if (use_gp05) {
-    pw <- gp05_log_weights_packed(v_minus,
-                                   alpha_gp05 = alpha_gp05,
-                                   gamma_gp05 = gamma_gn)
   } else {
     pw <- gn_log_weights_packed(v_minus, gamma_gn = gamma_gn)
   }

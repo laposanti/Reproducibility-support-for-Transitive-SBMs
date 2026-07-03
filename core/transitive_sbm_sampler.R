@@ -6,6 +6,50 @@
 Rcpp::sourceCpp("core/block_totals_for_poisson_cpp.cpp")
 source("helper_folder/load_sampler_helpers.R", chdir = FALSE)
 
+# Sampler arguments:
+# A: directed weighted adjacency matrix for the observed network.
+# K: initial number of blocks used to seed the random starting partition.
+# truth: named list of fixed parameter values when some coordinates are not in
+#   `free`; expected components are any missing subset of `z`, `psi`, `kappa`,
+#   and `eta`.
+# free: sampler coordinates to update; any omitted coordinates are held at
+#   their values in `truth`.
+# n_iter: total number of MCMC iterations.
+# burn: number of initial iterations discarded before saving draws.
+# thin: save one draw every `thin` iterations after burn-in.
+# verbose: print coarse progress diagnostics during sampling.
+# psi_constraint: ordered directional prior, either WST or SST.
+# seed: optional RNG seed for reproducible runs.
+# eta_identifiability: optional block-wise rescaling of `eta` to stabilise the
+#   degree-correction parameterisation.
+# shrink_when: when to repack labels and parameter dimensions after block birth
+#   and death moves.
+# refresh_pg_after_birth: retained compatibility flag from earlier PG-refresh
+#   logic; the current sampler refreshes PG latents once per z-sweep.
+# a_kappa, b_kappa: Gamma prior shape/rate for the symmetric block-volume
+#   intensities `kappa`.
+# a_eta, b_eta: Gamma prior shape/rate for node-level degree propensities
+#   `eta`.
+# mu0, sigma0: mean and standard deviation for WST pairwise directional
+#   log-odds, and for the first SST increment after distance reparameterisation.
+# tau0: standard deviation for SST directional increments beyond the first.
+# partition_prior: ordered partition prior used in z-updates; the cleaned
+#   bundle supports `GN`, `OCRP`, and `ROCRP`.
+# gamma_gn: birth penalty / concentration control for the Gnedin-style
+#   partition prior machinery.
+# theta_ocrp: concentration parameter for the ordered CRP variants.
+# sst_birth_score_mode: SST birth approximation used in the non-local
+#   directional birth score.
+# slot_radius_after_burnin: reserved hook for restricting candidate birth slots
+#   after burn-in; currently not activated in this core loop.
+# sample_b_kappa: if TRUE, update `b_kappa` hierarchically from the current
+#   `kappa` draw.
+# alpha0_bkappa, beta0_bkappa: Gamma hyperprior shape/rate for `b_kappa` when
+#   `sample_b_kappa = TRUE`.
+# use_mixing_moves: enable adjacent-swap and split-merge MH moves on top of the
+#   main Gibbs updates.
+# debug_dump_dir: optional directory where failing sampler states are dumped if
+#   NaN/Inf values are detected.
 modular_osbm_sampler <- function(
     A, K, truth = NA,
     free   = c("psi","kappa","eta","z"),
@@ -20,10 +64,8 @@ modular_osbm_sampler <- function(
     a_kappa = 1, b_kappa = 1,
     a_eta = 1, b_eta = 1,
     mu0 = 1, sigma0 = 2, tau0 = 0.15,
-    alpha0 = 1.0, discount = 0.0,
     partition_prior = 'OCRP',
     gamma_gn = 0.8,
-    alpha_gp05 = 0.5,
     theta_ocrp = 1.0,
     sst_birth_score_mode = c("exact_nonlocal", "local_approx"),
     slot_radius_after_burnin = NULL,
@@ -94,7 +136,6 @@ modular_osbm_sampler <- function(
     tau0    = tau0,
     partition_prior = partition_prior,
     gamma_gn = gamma_gn,
-    alpha_gp05 = alpha_gp05,
     theta_ocrp = theta_ocrp
   )
   # 
@@ -110,10 +151,8 @@ modular_osbm_sampler <- function(
   # 
   psi_hyper <- list(
     mu0 = hyper$mu0, sigma0 = hyper$sigma0, tau0 = hyper$tau0,
-    alpha0 = hyper$alpha0, discount = hyper$discount,
     partition_prior = hyper$partition_prior,
     gamma_gn = hyper$gamma_gn,
-    alpha_gp05 = hyper$alpha_gp05,
     theta_ocrp = hyper$theta_ocrp
   )
   # right after you build hyper / psi_hyper
@@ -387,7 +426,6 @@ for (it in seq_len(n_iter)) {
           omega_edge = omega_edge,
           slot_radius = slot_rad,
           partition_prior = psi_hyper$partition_prior,
-          alpha_gp05 = psi_hyper$alpha_gp05,
           theta_ocrp = psi_hyper$theta_ocrp
         )
 
@@ -431,7 +469,6 @@ for (it in seq_len(n_iter)) {
           mu0 = psi_hyper$mu0,
           sig2_0 = psi_hyper$sigma0^2,
           partition_prior = psi_hyper$partition_prior,
-          alpha_gp05 = psi_hyper$alpha_gp05,
           theta_ocrp = psi_hyper$theta_ocrp,
           birth_score_mode = sst_birth_score_mode
         )

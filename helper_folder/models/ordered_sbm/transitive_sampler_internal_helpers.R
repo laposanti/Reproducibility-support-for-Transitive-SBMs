@@ -648,6 +648,13 @@ urn_GN <- function(v_minus, gamma_GN){
     return("OCRP")
   }
 
+  if (!prior %in% c("GN", "OCRP", "ROCRP")) {
+    stop(
+      "`partition_prior` must be one of 'GN', 'OCRP', or 'ROCRP' in the cleaned bundle.",
+      call. = FALSE
+    )
+  }
+
   prior
 }
 
@@ -760,59 +767,6 @@ gn_log_weights_packed <- function(v_minus, gamma_gn) {
 }
 
 # ---------------------------------------------------------------------------
-# Penalised GP05 (Dirichlet ordered partition) prior log-weights
-# ---------------------------------------------------------------------------
-# Returns per-block and per-slot log-weights based on the GP05 composition
-# structure (theta=0) with a geometric penalty gamma on new-block events.
-#
-# Existing-block weights (Theorem 8, theta=0):
-#   Interior j < H:  w_j = v_j - alpha
-#   Last     j = H:  w_H = (v_H + 1)(v_H - alpha) / v_H
-#
-# New-block slot weights (with gamma penalty):
-#   Interior r <= H:   w_r = gamma * alpha
-#   Far-right r = H+1: w_r = gamma * alpha / v_H
-#
-# These are unnormalised log-weights; normalisation happens at sampling time.
-# Returns list(exist = numeric(H), new = numeric(H+1), per_slot = TRUE).
-# The per_slot = TRUE flag tells the z-update that new-block weights are
-# per-slot (no uniform slot averaging needed).
-gp05_log_weights_packed <- function(v_minus, alpha_gp05, gamma_gp05) {
-  v_minus <- as.numeric(v_minus)
-  H <- length(v_minus)
-  if (H < 1L) stop("gp05_log_weights_packed: H<1 (degenerate).", call. = FALSE)
-  if (!(alpha_gp05 > 0 && alpha_gp05 < 1))
-    stop("alpha_gp05 must be in (0,1).", call. = FALSE)
-  if (!(gamma_gp05 > 0 && gamma_gp05 < 1))
-    stop("gamma_gp05 must be in (0,1).", call. = FALSE)
-
-  # --- existing block weights ---
-  w_exist <- numeric(H)
-  for (j in seq_len(H)) {
-    if (j < H) {
-      w_exist[j] <- v_minus[j] - alpha_gp05
-    } else {
-      w_exist[j] <- (v_minus[H] + 1) * (v_minus[H] - alpha_gp05) / v_minus[H]
-    }
-  }
-  if (any(w_exist <= 0))
-    stop("GP05 existing-block weights non-positive; alpha too large for block sizes.",
-         call. = FALSE)
-
-  # --- new block slot weights ---
-  w_new <- numeric(H + 1L)
-  for (r in seq_len(H + 1L)) {
-    if (r <= H) {
-      w_new[r] <- gamma_gp05 * alpha_gp05
-    } else {
-      w_new[r] <- gamma_gp05 * alpha_gp05 / v_minus[H]
-    }
-  }
-
-  list(exist = log(w_exist), new = log(w_new), per_slot = TRUE)
-}
-
-# ---------------------------------------------------------------------------
 # Ordered CRP (regenerative DP composition) prior log-weights
 # ---------------------------------------------------------------------------
 # Predictive probabilities for the ordered CRP associated to the
@@ -896,88 +850,4 @@ ocrp_log_weights_packed <- function(v_minus, theta_ocrp) {
 
   list(exist = lp_exist, new = lp_new, per_slot = TRUE)
 }
-
-# ---------------------------------------------------------------------------
-# Expected K under penalised GP05 prior (exact + heuristic)
-# ---------------------------------------------------------------------------
-# Exact computation via O(n^2) recursion for C_{n,m}(alpha).
-# P(K=m) = gamma^{m-1} C_{n,m}(alpha) / Z_n(alpha,gamma)
-# E[K] = sum_m m * P(K=m)
-#
-# log_q_gp05(n, m, alpha): log decrement matrix q_{alpha,0}(n:m)
-.log_q_gp05 <- function(n, m, alpha) {
-  if (n < 1L || m < 1L || m > n) return(-Inf)
-  if (m == n) {
-    # diagonal: (1-alpha)_{n-1} / (n-1)!
-    if (n == 1L) return(0)  # q(1:1) = 1
-    return(sum(log(seq(1 - alpha, length.out = n - 1L, by = 1))) - lgamma(n))
-  }
-  # off-diagonal (m < n):
-  # C(n,m) * (1-alpha)_{m-1} / (n-m)_m * (n-m)*alpha / n
-  lq <- lchoose(n, m)
-  if (m >= 2L) lq <- lq + sum(log(seq(1 - alpha, length.out = m - 1L, by = 1)))
-  # (n-m)_m = (n-m)(n-m+1)...(n-1) = Gamma(n)/Gamma(n-m)
-  lq <- lq - (lgamma(n) - lgamma(n - m))
-  lq <- lq + log(n - m) + log(alpha) - log(n)
-  lq
-}
-
-gp05_expected_K <- function(n, alpha, gamma) {
-  stopifnot(n >= 1L, alpha > 0, alpha < 1, gamma > 0, gamma < 1)
-  if (n == 1L) return(list(EK = 1, pmf = 1, heuristic = 1))
-
-  # Precompute all log_q values: log_q_mat[i, j] = log q_{alpha,0}(i:j)
-  log_q_mat <- matrix(-Inf, n, n)
-  for (i in seq_len(n)) {
-    for (j in seq_len(i)) {
-      log_q_mat[i, j] <- .log_q_gp05(i, j, alpha)
-    }
-  }
-
-  # Recursion for log C_{n,m}(alpha)
-  # C_{j,1} = q_{alpha,0}(j:j)  for j >= 1
-  # C_{n,m} = sum_{j=1}^{n-m+1} q_{alpha,0}(n:j) * C_{n-j, m-1}
-  log_C <- matrix(-Inf, n, n)
-
-  # Base case: m=1
-  for (nn in seq_len(n)) {
-    log_C[nn, 1L] <- log_q_mat[nn, nn]
-  }
-
-  # Fill m = 2, ..., n
-  for (mm in 2L:n) {
-    for (nn in mm:n) {
-      j_max <- nn - mm + 1L
-      if (j_max < 1L) next
-      log_terms <- numeric(j_max)
-      for (j in seq_len(j_max)) {
-        remainder <- nn - j
-        if (remainder < mm - 1L) { log_terms[j] <- -Inf; next }
-        log_terms[j] <- log_q_mat[nn, j] + log_C[remainder, mm - 1L]
-      }
-      mx <- max(log_terms)
-      if (is.finite(mx)) {
-        log_C[nn, mm] <- mx + log(sum(exp(log_terms - mx)))
-      }
-    }
-  }
-
-  # P(K=m) proportional to gamma^{m-1} * C_{n,m}
-  log_unnorm <- numeric(n)
-  for (mm in seq_len(n)) {
-    log_unnorm[mm] <- (mm - 1L) * log(gamma) + log_C[n, mm]
-  }
-
-  mx <- max(log_unnorm[is.finite(log_unnorm)])
-  probs <- exp(log_unnorm - mx)
-  probs <- probs / sum(probs)
-
-  EK <- sum(seq_len(n) * probs)
-  list(
-    EK    = EK,
-    pmf   = probs,
-    heuristic = 1 + alpha * gamma * sum(1 / seq_len(n - 1L))
-  )
-}
-
 
