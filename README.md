@@ -16,19 +16,6 @@ under `scripts/analysis/`, `scripts/application/`, `scripts/simulation/`,
 `helper_folder/`, and `core/` are implementation code used by those entry
 points.
 
-## Reproduction bundle size
-
-For upload, archive the source bundle without local git history or generated
-outputs:
-
-```sh
-zip -r ../transitive_sbm_reproducibility.zip . \
-  -x ".git/*" "output/*" "*.zip" ".DS_Store" "*/.DS_Store"
-```
-
-This keeps the archive focused on reproducible source code, data, and README
-previews. The checked bundle is expected to stay below 20 MB after compression.
-
 ## Results presented in the paper and links to the key functions to reproduce them
 
 | Result in the PDF | Paper section | Preview / description | Generated file(s) | Script entry point(s) | Key builder function(s) |
